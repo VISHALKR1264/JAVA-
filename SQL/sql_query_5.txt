@@ -1,0 +1,261 @@
+ 
+//------------------------------------------------------------------Entity Integrity Constraints
+SQL> create table student(rn number(10)primary key,
+  2  admno number(10) unique,name varchar2(20) not null,
+  3  age number(2) check (age>=18));
+
+Table created.
+
+SQL> desc student;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ RN                                        NOT NULL NUMBER(10)
+ ADMNO                                              NUMBER(10)
+ NAME                                      NOT NULL VARCHAR2(20)
+ AGE                                                NUMBER(2)
+
+SQL> insert into student(rn,name,age,admno) values('&rollno','&Name','&Age','&admission');
+Enter value for rollno: 100
+Enter value for name: vishal
+Enter value for age: 22
+Enter value for admission: 2021
+old   1: insert into student(rn,name,age,admno) values('&rollno','&Name','&Age','&admission')
+new   1: insert into student(rn,name,age,admno) values('100','vishal','22','2021')
+
+1 row created.
+
+SQL> /
+Enter value for rollno: 101
+Enter value for name: aryan
+Enter value for age: 18
+Enter value for admission: 2018
+old   1: insert into student(rn,name,age,admno) values('&rollno','&Name','&Age','&admission')
+new   1: insert into student(rn,name,age,admno) values('101','aryan','18','2018')
+
+1 row created.
+
+SQL> /
+Enter value for rollno: 103
+Enter value for name: animesh
+Enter value for age: 24
+Enter value for admission: 2022
+old   1: insert into student(rn,name,age,admno) values('&rollno','&Name','&Age','&admission')
+new   1: insert into student(rn,name,age,admno) values('103','animesh','24','2022')
+
+1 row created.
+
+SQL> insert into student values('104','2024','ashu','25');
+
+1 row created.
+
+SQL> select *from student;
+
+        RN      ADMNO NAME                        AGE                           
+---------- ---------- -------------------- ----------                           
+       100       2021 vishal                       22                           
+       101       2018 aryan                        18                           
+       103       2022 animesh                      24                           
+       104       2024 ashu                         25                           
+
+SQL> --Now checking all constraints::
+SQL> --For primary key not null and unique i.e.rollno::
+SQL> insert into student values('104','2024','ashu','25');
+insert into student values('104','2024','ashu','25')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SYSTEM.SYS_C007052) violated 
+
+
+SQL> insert into student values('','2024','ashu','25');
+insert into student values('','2024','ashu','25')
+                           *
+ERROR at line 1:
+ORA-01400: cannot insert NULL into ("SYSTEM"."STUDENT"."RN") 
+
+
+SQL> --Now NOTNULL i.e.name::
+SQL> insert into student values('105','2024','','25');
+insert into student values('105','2024','','25')
+                                        *
+ERROR at line 1:
+ORA-01400: cannot insert NULL into ("SYSTEM"."STUDENT"."NAME") 
+
+
+SQL> --Now for UNIQUE i.e.Admno::
+SQL> insert into student values('105','2024','arun','25');
+insert into student values('105','2024','arun','25')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SYSTEM.SYS_C007053) violated 
+
+
+SQL> insert into student values('105','','arun','25');
+
+1 row created.
+
+SQL> --As we had taken null as admno still it is created ::
+SQL> select *from student;
+
+        RN      ADMNO NAME                        AGE                           
+---------- ---------- -------------------- ----------                           
+       100       2021 vishal                       22                           
+       101       2018 aryan                        18                           
+       103       2022 animesh                      24                           
+       104       2024 ashu                         25                           
+       105            arun                         25                           
+
+
+SQL> insert into student values('106','','yash','25');
+
+1 row created.
+
+SQL> select *from student;
+
+        RN      ADMNO NAME                        AGE                           
+---------- ---------- -------------------- ----------                           
+       100       2021 vishal                       22                           
+       101       2018 aryan                        18                           
+       103       2022 animesh                      24                           
+       104       2024 ashu                         25                           
+       105            arun                         25                           
+       106            yash                         25                           
+
+6 rows selected.
+
+SQL> --We can have any number of null entry even if we have UNIQUE constraints::
+SQL> delete from student where admno is null;
+
+2 rows deleted.
+
+SQL> select *from student;
+
+        RN      ADMNO NAME                        AGE                           
+---------- ---------- -------------------- ----------                           
+       100       2021 vishal                       22                           
+       101       2018 aryan                        18                           
+       103       2022 animesh                      24                           
+       104       2024 ashu                         25                           
+
+SQL> --IF i want both UNIQUE & NOTNULL::
+
+
+SQL> alter table student modify (admno not null);
+
+Table altered.
+
+SQL> desc student;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ RN                                        NOT NULL NUMBER(10)
+ ADMNO                                     NOT NULL NUMBER(10)
+ NAME                                      NOT NULL VARCHAR2(20)
+ AGE                                                NUMBER(2)
+
+SQL> insert into student values('105','','yash','25');
+insert into student values('105','','yash','25')
+                                 *
+ERROR at line 1:
+ORA-01400: cannot insert NULL into ("SYSTEM"."STUDENT"."ADMNO") 
+
+
+SQL> select *from student;
+
+        RN      ADMNO NAME                        AGE                           
+---------- ---------- -------------------- ----------                           
+       100       2021 vishal                       22                           
+       101       2018 aryan                        18                           
+       103       2022 animesh                      24                           
+       104       2024 ashu                         25                           
+
+SQL> insert into student values('105','2025','yash','25');
+
+1 row created.
+
+SQL> --Now i want my name will also be UNIQUE::
+SQL> --1st-->alter table student modify (name unique);
+SQL> alter table student add constraint uc unique(name);
+
+Table altered.
+
+
+SQL> insert into student values('106','2026','vishal','28');
+insert into student values('106','2026','vishal','28')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SYSTEM.UC) violated 
+
+
+SQL> --name had to be unique::
+SQL> insert into student values('106','2026','vishal Agnihotri','28');
+
+1 row created.
+
+SQL> select *from student;
+
+        RN      ADMNO NAME                        AGE                           
+---------- ---------- -------------------- ----------                           
+       100       2021 vishal                       22                           
+       101       2018 aryan                        18                           
+       103       2022 animesh                      24                           
+       104       2024 ashu                         25                           
+       106       2026 vishal Agnihotri             28                           
+       105       2025 yash                         25                           
+
+6 rows selected.
+
+SQL> --alter table student add constraint uc unique(name)-->THIS CAN'T BE USE FOR NOT NULL::
+SQL> --Modify can use for any Constraints::
+SQL> --DEFAULT CONSTRAINTS:::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+SQL> create table temp(fee number(10) default 10000,name varchar(20));
+
+Table created.
+
+SQL> desc temp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ FEE                                                NUMBER(10)
+ NAME                                               VARCHAR2(20)
+
+SQL> --IF we define any default constraints with any column then, we can skip the value for that partcular column while inserting new row into the column ::
+
+
+SQL> insert into temp (name) values('TIYA');
+
+1 row created.
+
+
+SQL> insert into temp (name,fee) values('arun',5000);
+
+1 row created.
+
+SQL> select *from temp;
+
+       FEE NAME                                                                 
+---------- --------------------                                                 
+     10000 TIYA                                                                 
+      5000 arun                                                                 
+
+SQL> insert into temp (name) values('&Name');
+Enter value for name: rohan
+old   1: insert into temp (name) values('&Name')
+new   1: insert into temp (name) values('rohan')
+
+1 row created.
+
+SQL> /
+Enter value for name: deepika
+old   1: insert into temp (name) values('&Name')
+new   1: insert into temp (name) values('deepika')
+
+1 row created.
+
+SQL> select *from temp;
+
+       FEE NAME                                                                 
+---------- --------------------                                                 
+     10000 TIYA                                                                 
+      5000 arun                                                                 
+     10000 rohan                                                                
+     10000 deepika                                                              
+
+SQL> spool off;

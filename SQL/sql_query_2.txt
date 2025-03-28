@@ -1,0 +1,133 @@
+--->>>ALTER table is used to modify the structure of the DataBase.
+SQL> alter table student add mobileno number(10);
+
+Table altered.
+
+SQL> select *from student;
+
+NAME                          ROLLNO BRANCH       MOBILENO                      
+------------------------- ---------- ---------- ----------                      
+vishal                           103 CSE                                        
+yash                             101 CSE                                        
+animesh                          104 IT                                         
+sweeta                           102 IT                                         
+aryan                            105 PCM    
+
+                                    
+--->>> Update command is used to modify existing record from the DB
+SQL> update student set mobileno ='7856928365';        --->>>this will affect every row in the table
+
+5 rows updated.
+
+SQL> select *from student;
+
+NAME                          ROLLNO BRANCH       MOBILENO                      
+------------------------- ---------- ---------- ----------                      
+vishal                           103 CSE        7856928365                      
+yash                             101 CSE        7856928365                      
+animesh                          104 IT         7856928365                      
+sweeta                           102 IT         7856928365                      
+aryan                            105 PCM        7856928365                      
+
+
+
+SQL> alter table student drop column mobileno;
+
+Table altered.
+
+SQL> select *from student;
+
+NAME                          ROLLNO BRANCH                                     
+------------------------- ---------- ----------                                 
+vishal                           103 CSE                                        
+yash                             101 CSE                                        
+animesh                          104 IT                                         
+sweeta                           102 IT                                         
+aryan                            105 PCM     
+
+
+--->>>For renaming the Column                                   
+
+SQL> alter table student rename column branch to section;
+
+Table altered.
+
+SQL> select *from student;
+
+NAME                          ROLLNO SECTION                                    
+------------------------- ---------- ----------                                 
+vishal                           103 CSE                                        
+yash                             101 CSE                                        
+animesh                          104 IT                                         
+sweeta                           102 IT                                         
+aryan                            105 PCM                                        
+
+SQL> -- For renaming the table :
+SQL> rename student to children;
+
+Table renamed.
+
+SQL> select *from student;
+select *from student
+             *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> select *from children;
+
+NAME                          ROLLNO SECTION                                    
+------------------------- ---------- ----------                                 
+vishal                           103 CSE                                        
+yash                             101 CSE                                        
+animesh                          104 IT                                         
+sweeta                           102 IT                                         
+aryan                            105 PCM                                        
+
+SQL> rename children to student;
+
+Table renamed.
+
+SQL> select *from student;
+
+NAME                          ROLLNO SECTION                                    
+------------------------- ---------- ----------                                 
+vishal                           103 CSE                                        
+yash                             101 CSE                                        
+animesh                          104 IT                                         
+sweeta                           102 IT                                         
+aryan                            105 PCM  
+
+--->>> effectively removes all rows from the student table without logging individual row deletions, making it a faster option compared to DELETE.
+--->>>In DELETE Command It will dlt specific row "delete from student1 where rollno >= 101;"
+--->>>Delete from student;  -->Will dlt all row from the table 
+                                      
+
+SQL> truncate table student;
+
+Table truncated.
+
+SQL> select *from student;
+
+no rows selected
+
+SQL> --truncate to dlt all row and drop is to delete whole table with its schema :
+
+SQL> desc student;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ NAME                                               VARCHAR2(25)
+ ROLLNO                                             NUMBER(10)
+ SECTION                                            VARCHAR2(10)
+
+SQL> delete from student;
+
+0 rows deleted.
+
+
+SQL> --'delete from student will also act same like truncate':
+SQL> --"for specific row deletion --delete from student where rollno='12';
+
+SQL> --difference between truncate and delete command is :
+SQL> --truncate command is DDL command and Delete is DML command:
+SQL>  spool off;

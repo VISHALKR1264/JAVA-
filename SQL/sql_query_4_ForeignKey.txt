@@ -1,0 +1,199 @@
+--------------------------------------------------------------------------------------------->Foreign Key::
+SQL> desc temp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SN                                        NOT NULL NUMBER(3)
+ NAME                                               VARCHAR2(10)
+
+SQL> select *from temp;
+
+        SN NAME                                                                 
+---------- ----------                                                           
+        11 vishal                                                               
+        22 aryan                                                                
+        33 ashu                                                                 
+        44 supriya                                                             
+        55 sakshi                                                               
+
+SQL> --For making a FOREIGN KEY::::: we need to define a child table or detail table where we can use primary key of this table as a reference key for the new table::
+
+--->>>When defining a foreign key, the column needs to be explicitly stated as a foreign key with a reference to a primary key
+
+SQL> create table temp_child(srno number(3),course varchar(10),
+  2  constraint fk foreign key (srno) references temp(sn));
+
+Table created.
+
+SQL> desc temp_child;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SRNO                                               NUMBER(3)
+ COURSE                                             VARCHAR2(10)
+
+SQL> insert into temp_child values ('&srno','&course');
+Enter value for srno: 33
+Enter value for course: CSE
+old   1: insert into temp_child values ('&srno','&course')
+new   1: insert into temp_child values ('33','CSE')
+
+1 row created.
+
+SQL> --33 was allow to enter as it is a FK and it is refering to the PK 33 of the parent table ::::
+SQL> /
+Enter value for srno: 55
+Enter value for course: IT
+old   1: insert into temp_child values ('&srno','&course')
+new   1: insert into temp_child values ('55','IT')
+
+1 row created.
+
+SQL> /
+Enter value for srno: 33
+Enter value for course: IT
+old   1: insert into temp_child values ('&srno','&course')
+new   1: insert into temp_child values ('33','IT')
+
+1 row created.
+
+SQL> select *from temp_child;
+
+      SRNO COURSE                                                               
+---------- ----------                                                           
+        33 CSE                                                                  
+        55 IT                                                                   
+        33 IT                                                                   
+
+SQL> --All the entry of this child table is belonging to the primary table ::
+
+
+SQL> insert into temp_child values ('&srno','&course');
+Enter value for srno: 77
+Enter value for course: CSE
+old   1: insert into temp_child values ('&srno','&course')
+new   1: insert into temp_child values ('77','CSE')
+insert into temp_child values ('77','CSE')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (SYSTEM.FK) violated - parent key not found 
+
+
+SQL> --We will not take another number as if, it is not found in PK attribute of the master table :::
+SQL> select *from temp_child;
+
+      SRNO COURSE                                                               
+---------- ----------                                                           
+        33 CSE                                                                  
+        55 IT                                                                   
+        33 IT                                                                   
+
+SQL> --1st...We can not enter any extra entry in FK which is not a part of master table
+SQL> --2nd...We can not delete any entry from the master table which is prestent in the child table
+SQL> select *from temp_child;
+
+      SRNO COURSE                                                               
+---------- ----------                                                           
+        33 CSE                                                                  
+        55 IT                                                                   
+        33 IT                                                                   
+
+SQL> select *from temp;
+
+        SN NAME                                                                 
+---------- ----------                                                           
+        11 vishal                                                               
+        22 aryan                                                                
+        33 ashu                                                                 
+        44 supriya                                                              
+        55 sakshi                                                               
+
+SQL> delete from temp where sn=33;
+delete from temp where sn=33
+*
+ERROR at line 1:
+ORA-02292: integrity constraint (SYSTEM.FK) violated - child record found 
+
+
+SQL> delete from temp where sn=11;
+
+1 row deleted.
+
+
+
+SQL> delete from temp_child where srno=33;
+
+2 rows deleted.
+
+SQL> --bcz in child table we have 2 row which srno=33::
+SQL> select *from temp;
+
+        SN NAME                                                                 
+---------- ----------                                                           
+        22 aryan                                                                
+        33 ashu                                                                 
+        44 supriya                                                              
+        55 sakshi                                                               
+
+SQL> select *from temp_child;
+
+      SRNO COURSE                                                               
+---------- ----------                                                           
+        55 IT                                                                   
+
+SQL> delete from temp where sn=33;
+
+1 row deleted.
+
+SQL> --DONE::
+SQL> --As 33 is deleted from first child table then form master::
+SQL> --As this temp table has 1 child table so we can't drop it also::
+SQL> drop table temp;
+drop table temp
+           *
+ERROR at line 1:
+ORA-02449: unique/primary keys in table referenced by foreign keys 
+
+
+SQL> drop table temp_child;
+
+Table dropped.
+
+SQL> drop table temp;
+
+Table dropped.
+
+SQL> spool off;
+
+CREATE TABLE Departments (
+    DeptID INT PRIMARY KEY,
+    DeptName VARCHAR(100)
+);
+
+CREATE TABLE Employees (
+    EmpID INT PRIMARY KEY,
+    EmpName VARCHAR(100),
+    DeptID INT,
+    FOREIGN KEY (DeptID) REFERENCES Departments(DeptID) 
+        ON UPDATE CASCADE 
+        ON DELETE CASCADE
+);
+
+
+INSERT INTO Departments (DeptID, DeptName) VALUES 
+(1, 'HR'), 
+(2, 'IT'), 
+(3, 'Sales');
+
+INSERT INTO Employees (EmpID, EmpName, DeptID) VALUES 
+(101, 'Alice', 1),
+(102, 'Bob', 2),
+(103, 'Charlie', 1);
+
+UPDATE Departments SET DeptID = 10 WHERE DeptID = 1;
+
+
+DELETE FROM Departments WHERE DeptID = 2;
+
+
+ON UPDATE CASCADE automatically updated the DeptID in the Employees table when the corresponding department's ID was changed.
+ON DELETE CASCADE automatically deleted the employee records associated with a deleted department.
+

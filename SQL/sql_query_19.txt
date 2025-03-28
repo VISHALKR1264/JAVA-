@@ -1,0 +1,302 @@
+SQL> 
+SQL> --Comparative Analysis of JOIN & SubQuery::
+SQL> --Comparision of : ANY, IN, NOT IN, EXISTS Logical Operators::
+
+SQL> 
+SQL> select *from emp;
+
+       ENO ENAME          SALARY DEP                                            
+---------- ---------- ---------- ---                                            
+       120 Arun            45000 IT                                             
+       301 Don             65000 IT                                             
+       235 Soni            34000 IT                                             
+       313 Ravi            65000 IT                                             
+       250 Faruk           54000 CSE                                            
+       432 Emili           45030 CSE                                            
+       200 Queen           56000 CSE                                            
+
+7 rows selected.
+
+SQL> select *from project;
+
+       PNO        ENO                                                           
+---------- ----------                                                           
+       111        432                                                           
+       333        250                                                           
+       222        301                                                           
+       333        432                                                           
+
+SQL> --Eno of emp is Primary key , eno of project is Foreign Key::
+SQL> 
+SQL> --@@ To extract the records from EMP for the employee working with any project.
+SQL> 
+SQL> --@@ To extract the record from EMP for the employee not working with any project.
+SQL> 
+SQL> --SOLUTION--> SubQuery & JOIN
+SQL> 
+SQL> --By SubQuery::
+SQL> 
+SQL> select *from emp e where exists (select *from project p where e.eno =p.eno);
+
+       ENO ENAME          SALARY DEP                                            
+---------- ---------- ---------- ---                                            
+       432 Emili           45030 CSE                                            
+       250 Faruk           54000 CSE                                            
+       301 Don             65000 IT                                             
+
+
+SQL> select *from emp where eno IN (select eno from project);
+
+       ENO ENAME          SALARY DEP                                            
+---------- ---------- ---------- ---                                            
+       432 Emili           45030 CSE                                            
+       250 Faruk           54000 CSE                                            
+       301 Don             65000 IT                                             
+
+SQL> select *from emp where eno = ANY(select eno from project);
+
+       ENO ENAME          SALARY DEP                                            
+---------- ---------- ---------- ---                                            
+       432 Emili           45030 CSE                                            
+       250 Faruk           54000 CSE                                            
+       301 Don             65000 IT                                             
+
+SQL> 
+SQL> 
+SQL> --2......Not working Question::
+SQL> select *from emp e where NOT EXISTS (select *from project p where e.eno =p.eno);
+
+       ENO ENAME          SALARY DEP                                            
+---------- ---------- ---------- ---                                            
+       235 Soni            34000 IT                                             
+       200 Queen           56000 CSE                                            
+       313 Ravi            65000 IT                                             
+       120 Arun            45000 IT                                             
+
+SQL> select *from emp where eno NOT IN (select eno from project);
+
+       ENO ENAME          SALARY DEP                                            
+---------- ---------- ---------- ---                                            
+       235 Soni            34000 IT                                             
+       200 Queen           56000 CSE                                            
+       313 Ravi            65000 IT                                             
+       120 Arun            45000 IT                                             
+
+SQL> select *from emp where eno != ANY(select eno from project);
+
+       ENO ENAME          SALARY DEP                                            
+---------- ---------- ---------- ---                                            
+       120 Arun            45000 IT                                             
+       301 Don             65000 IT                                             
+       235 Soni            34000 IT                                             
+       313 Ravi            65000 IT                                             
+       250 Faruk           54000 CSE                                            
+       432 Emili           45030 CSE                                            
+       200 Queen           56000 CSE                                            
+
+7 rows selected.
+
+SQL> --Any is going to return only True or false value::
+--For not we can't use ANY ::
+
+SQL> 
+SQL> --BY JOIN::::::::::::::::::::::::::::::::::::::::::::::::::
+SQL> 
+SQL> 
+
+
+--Normal Select::
+SQL> select *from emp e,project p where e.eno=p.eno;
+
+       ENO ENAME          SALARY DEP        PNO        ENO                      
+---------- ---------- ---------- --- ---------- ----------                      
+       301 Don             65000 IT         222        301                      
+       250 Faruk           54000 CSE        333        250                      
+       432 Emili           45030 CSE        333        432                      
+       432 Emili           45030 CSE        111        432                      
+
+SQL> 
+SQL> --With JOIN::::::::::
+SQL> 
+SQL> select *from emp e JOIN project p ON e.eno=p.eno;
+
+       ENO ENAME          SALARY DEP        PNO        ENO                      
+---------- ---------- ---------- --- ---------- ----------                      
+       301 Don             65000 IT         222        301                      
+       250 Faruk           54000 CSE        333        250                      
+       432 Emili           45030 CSE        333        432                      
+       432 Emili           45030 CSE        111        432                      
+
+
+
+SQL> select *from emp e NATURAL JOIN project p;
+
+       ENO ENAME          SALARY DEP        PNO                                 
+---------- ---------- ---------- --- ----------                                 
+       301 Don             65000 IT         222                                 
+       250 Faruk           54000 CSE        333                                 
+       432 Emili           45030 CSE        333                                 
+       432 Emili           45030 CSE        111                                 
+
+SQL> select eno,ename,salary,dept from emp e NATURAL JOIN project p;
+
+       ENO ENAME          SALARY DEP                                            
+---------- ---------- ---------- ---                                            
+       301 Don             65000 IT                                             
+       250 Faruk           54000 CSE                                            
+       432 Emili           45030 CSE                                            
+       432 Emili           45030 CSE                                            
+
+
+SQL> select *from emp e JOIN project p ON e.eno=p.eno;
+
+       ENO ENAME          SALARY DEP        PNO        ENO                      
+---------- ---------- ---------- --- ---------- ----------                      
+       301 Don             65000 IT         222        301                      
+       250 Faruk           54000 CSE        333        250                      
+       432 Emili           45030 CSE        333        432                      
+       432 Emili           45030 CSE        111        432                      
+
+
+
+
+SQL> select eno,ename,salary,dept from emp e JOIN project p on e.eno=p.eno;
+select eno,ename,salary,dept from emp e JOIN project p on e.eno=p.eno
+       *
+ERROR at line 1:
+ORA-00918: column ambiguously defined 
+
+--Therefore 
+
+SQL> select e.eno,ename,salary,dept from emp e JOIN project p on e.eno=p.eno;
+
+       ENO ENAME          SALARY DEP                                            
+---------- ---------- ---------- ---                                            
+       301 Don             65000 IT                                             
+       250 Faruk           54000 CSE                                            
+       432 Emili           45030 CSE                                            
+       432 Emili           45030 CSE          
+
+                                  
+
+SQL> select distinct e.eno,ename,salary,dept from emp e JOIN project p on e.eno=p.eno;
+
+       ENO ENAME          SALARY DEP                                            
+---------- ---------- ---------- ---                                            
+       301 Don             65000 IT                                             
+       250 Faruk           54000 CSE                                            
+       432 Emili           45030 CSE                                            
+
+SQL> select distinct (e.eno),ename,salary,dept from emp e JOIN project p on e.eno=p.eno;
+
+       ENO ENAME          SALARY DEP                                            
+---------- ---------- ---------- ---                                            
+       301 Don             65000 IT                                             
+       250 Faruk           54000 CSE                                            
+       432 Emili           45030 CSE                                            
+
+
+SQL> --SubQuery is Slower than Join::
+SQL> 
+SQL> 
+SQL> 2nd Question::
+
+SQL> select distinct (e.eno),ename,salary,dept from emp e JOIN project p on e.eno!=p.eno;
+
+       ENO ENAME          SALARY DEP                                            
+---------- ---------- ---------- ---                                            
+       301 Don             65000 IT                                             
+       313 Ravi            65000 IT                                             
+       250 Faruk           54000 CSE                                            
+       200 Queen           56000 CSE                                            
+       432 Emili           45030 CSE                                            
+       235 Soni            34000 IT                                             
+       120 Arun            45000 IT                                             
+
+7 rows selected.
+
+SQL> select e.eno,ename,salary,dept from emp e JOIN project p on e.eno!=p.eno;
+
+       ENO ENAME          SALARY DEP                                            
+---------- ---------- ---------- ---                                            
+       120 Arun            45000 IT                                             
+       301 Don             65000 IT                                             
+       235 Soni            34000 IT                                             
+       313 Ravi            65000 IT                                             
+       250 Faruk           54000 CSE                                            
+       200 Queen           56000 CSE                                            
+       120 Arun            45000 IT                                             
+       301 Don             65000 IT                                             
+       235 Soni            34000 IT                                             
+       313 Ravi            65000 IT                                             
+       432 Emili           45030 CSE                                            
+
+       ENO ENAME          SALARY DEP                                            
+---------- ---------- ---------- ---                                            
+       200 Queen           56000 CSE                                            
+       120 Arun            45000 IT                                             
+       235 Soni            34000 IT                                             
+       313 Ravi            65000 IT                                             
+       250 Faruk           54000 CSE                                            
+       432 Emili           45030 CSE                                            
+       200 Queen           56000 CSE                                            
+       120 Arun            45000 IT                                             
+       301 Don             65000 IT                                             
+       235 Soni            34000 IT                                             
+       313 Ravi            65000 IT                                             
+
+       ENO ENAME          SALARY DEP                                            
+---------- ---------- ---------- ---                                            
+       250 Faruk           54000 CSE                                            
+       200 Queen           56000 CSE                                            
+
+24 rows selected.
+
+SQL> select distinct (e.eno),ename,salary,dept from emp e LEFT OUTER JOIN project p on e.eno = p.eno;
+
+       ENO ENAME          SALARY DEP                                            
+---------- ---------- ---------- ---                                            
+       301 Don             65000 IT                                             
+       313 Ravi            65000 IT                                             
+       250 Faruk           54000 CSE                                            
+       432 Emili           45030 CSE                                            
+       200 Queen           56000 CSE                                            
+       235 Soni            34000 IT                                             
+       120 Arun            45000 IT                                             
+
+7 rows selected.
+
+SQL> select *from emp e LEFT OUTER JOIN project p on e.eno = p.eno;
+
+       ENO ENAME          SALARY DEP        PNO        ENO                      
+---------- ---------- ---------- --- ---------- ----------                      
+       432 Emili           45030 CSE        111        432                      
+       250 Faruk           54000 CSE        333        250                      
+       301 Don             65000 IT         222        301                      
+       432 Emili           45030 CSE        333        432                      
+       235 Soni            34000 IT                                             
+       200 Queen           56000 CSE                                            
+       313 Ravi            65000 IT                                             
+       120 Arun            45000 IT                                             
+
+8 rows selected.
+
+SQL> select *from emp e LEFT OUTER JOIN project p on e.eno = p.eno where pno is null;
+
+       ENO ENAME          SALARY DEP        PNO        ENO                      
+---------- ---------- ---------- --- ---------- ----------                      
+       235 Soni            34000 IT                                             
+       200 Queen           56000 CSE                                            
+       313 Ravi            65000 IT                                             
+       120 Arun            45000 IT                                             
+
+SQL> select distinct(e.eno),ename,salary,dept from emp e LEFT OUTER JOIN project p on e.eno = p.eno where pno is null;
+
+       ENO ENAME          SALARY DEP                                            
+---------- ---------- ---------- ---                                            
+       313 Ravi            65000 IT                                             
+       200 Queen           56000 CSE                                            
+       235 Soni            34000 IT                                             
+       120 Arun            45000 IT                                             
+
+SQL> spool off;

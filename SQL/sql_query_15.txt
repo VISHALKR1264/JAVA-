@@ -1,0 +1,158 @@
+SQL> --OUTER JOIN
+SQL> 
+SQL> --(left,right,full) joinss::
+SQL> 
+SQL> --It is covering all the extra touples were left by NATURAL JOINS OR EQUI JOINS::
+SQL> 
+SQL> --In NATURAL JOIN it only return matching rows of both the tables so, information loses occurs;
+SQL> --In Outer join we have choice to keep all the touple of relation 'R' or 'S' or of both the relationss.
+SQL> 
+SQL> 
+SQL> --LEFT JOIN
+
+SQL> It will keep every touple in left of the relation
+
+SQL> select *from student;
+
+    ROLLNO NAME       BRA                                                       
+---------- ---------- ---                                                       
+        44 tiya       CSE                                                       
+        11 riya       CSE                                                       
+        22 diya       IT                                                        
+        33 miya       IT                                                        
+
+SQL> select *from library;
+
+    ROLLNO BOOK                                                                 
+---------- -------                                                              
+        22 DBMS                                                                 
+        33 PYTHON                                                               
+
+--WE CAN'T INSERT AS IT IS FOREIGN KEY 
+--AND NEW TOUPLES OTHER THAN PRIMARY KEY WERE NOT ABLE TO INSERT
+
+SQL> insert into library values(205,'Oracle');
+insert into library values(205,'Oracle')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (SYSTEM.SYS_C007228) violated - parent key not 
+found 
+
+
+
+SQL> SELECT constraint_name
+     FROM user_constraints
+     WHERE table_name = 'LIBRARY' AND constraint_type = 'R';
+
+CONSTRAINT_NAME                                                                 
+------------------------------                                                  
+SYS_C007228                                                                     
+
+SQL> alter table library drop constraint sys_c007228;
+
+Table altered.
+
+SQL> insert into library values(205,'Oracle');
+
+1 row created.
+
+SQL> insert into library values(110,'MySQL');
+
+1 row created.
+
+SQL> insert into library values(305,'DBMS');
+
+1 row created.
+
+SQL> select *from library;
+
+    ROLLNO BOOK                                                                 
+---------- -------                                                              
+        22 DBMS                                                                 
+        33 PYTHON                                                               
+       205 Oracle                                                               
+       110 MySQL                                                                
+       305 DBMS                                                                 
+
+
+
+SQL> select *from student s left join library l on s.rollno=l.rollno;
+
+    ROLLNO NAME       BRA     ROLLNO BOOK                                       
+---------- ---------- --- ---------- -------                                    
+        22 diya       IT          22 DBMS                                       
+        33 miya       IT          33 PYTHON                                     
+        11 riya       CSE                                                       
+        44 tiya       CSE                                                       
+
+SQL> --Left Outer Join::
+
+SQL> --we get  all Touple of student tabless (left)::
+SQL> --but 11 and 44 have not in library so it will be concatenated with null valuesss::
+
+SQL> select *from student s right join library l on s.rollno=l.rollno;
+
+    ROLLNO NAME       BRA     ROLLNO BOOK                                       
+---------- ---------- --- ---------- -------                                    
+        22 diya       IT          22 DBMS                                       
+        33 miya       IT          33 PYTHON                                     
+                                 205 Oracle                                     
+                                 110 MySQL                                      
+                                 305 DBMS                                       
+
+SQL> --Just Oposite with Right all library touples were present and non matching touples were concatenated with null values::
+SQL> 
+SQL> 
+SQL> select *from student s left outer join library l on s.rollno=l.rollno;
+
+    ROLLNO NAME       BRA     ROLLNO BOOK                                       
+---------- ---------- --- ---------- -------                                    
+        22 diya       IT          22 DBMS                                       
+        33 miya       IT          33 PYTHON                                     
+        11 riya       CSE                                                       
+        44 tiya       CSE                                                       
+
+SQL> select *from student s right outer join library l on s.rollno=l.rollno;
+
+    ROLLNO NAME       BRA     ROLLNO BOOK                                       
+---------- ---------- --- ---------- -------                                    
+        22 diya       IT          22 DBMS                                       
+        33 miya       IT          33 PYTHON                                     
+                                 205 Oracle                                     
+                                 110 MySQL                                      
+                                 305 DBMS                                       
+
+SQL> --FULL Outer Join
+
+SQL> --It keep all touples in both the left and right relations::
+SQL> --If no matching touple are found,  then the corresponding touple of the another table will be padded with the null values ::
+
+SQL> select *from student s full outer join library l on s.rollno=l.rollno;
+
+    ROLLNO NAME       BRA     ROLLNO BOOK                                       
+---------- ---------- --- ---------- -------                                    
+        22 diya       IT          22 DBMS                                       
+        33 miya       IT          33 PYTHON                                     
+                                 205 Oracle                                     
+                                 110 MySQL                                      
+                                 305 DBMS                                       
+        11 riya       CSE                                                       
+        44 tiya       CSE                                                       
+
+7 rows selected.
+
+SQL> select *from student s full join library l on s.rollno=l.rollno;
+
+    ROLLNO NAME       BRA     ROLLNO BOOK                                       
+---------- ---------- --- ---------- -------                                    
+        22 diya       IT          22 DBMS                                       
+        33 miya       IT          33 PYTHON                                     
+                                 205 Oracle                                     
+                                 110 MySQL                                      
+                                 305 DBMS                                       
+        11 riya       CSE                                                       
+        44 tiya       CSE                                                       
+
+7 rows selected.
+
+SQL> spool off;

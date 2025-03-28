@@ -1,0 +1,94 @@
+SQL> --Types of JOIN operations:::
+SQL> 
+SQL> EQUI JOIN & NATURAL JOIN::
+SQL> 
+SQL> --Theta /Non-Equi Join
+SQL> --Self Join
+SQL> --Outer join
+SQL> 
+SQL> --Equi/Inner join  && Natural Join both work with " = " operation.
+
+SQL> Equi Join ->Have one or more pairs of attribute that have identical values in every touples, don't need of same column name.
+SQL> 
+SQL> select *from student;
+
+    ROLLNO NAME       BRA                                                       
+---------- ---------- ---                                                       
+        11 riya       CSE                                                       
+        22 diya       IT                                                        
+        33 miya       IT                                                        
+
+SQL> select *from library;
+
+    ROLLNO BOOK                                                                 
+---------- -------                                                              
+        22 DBMS                                                                 
+        33 PYTHON   
+ 
+SQL> --CARTISEAN PRODUCT::    
+
+SQL> select *from student,library;
+
+    ROLLNO NAME       BRA     ROLLNO BOOK                                       
+---------- ---------- --- ---------- -------                                    
+        11 riya       CSE         22 DBMS                                       
+        22 diya       IT          22 DBMS                                       
+        33 miya       IT          22 DBMS                                       
+        11 riya       CSE         33 PYTHON                                     
+        22 diya       IT          33 PYTHON                                     
+        33 miya       IT          33 PYTHON                                     
+
+6 rows selected.
+                                                        
+--EQUI JOIN
+
+SQL> select *from student s join library l on s.rollno=l.rollno;
+
+    ROLLNO NAME       BRA     ROLLNO BOOK                                       
+---------- ---------- --- ---------- -------                                    
+        22 diya       IT          22 DBMS                                       
+        33 miya       IT          33 PYTHON                                     
+
+--INNER IS OPTIONAL
+
+SQL> select *from student s inner join library l on s.rollno=l.rollno;
+
+    ROLLNO NAME       BRA     ROLLNO BOOK                                       
+---------- ---------- --- ---------- -------                                    
+        22 diya       IT          22 DBMS                                       
+        33 miya       IT          33 PYTHON                                     
+
+
+SQL> --This is normal join ::
+
+SQL> select *from student s, library l where s.rollno=l.rollno;
+
+    ROLLNO NAME       BRA     ROLLNO BOOK                                       
+---------- ---------- --- ---------- -------                                    
+        22 diya       IT          22 DBMS                                       
+        33 miya       IT          33 PYTHON                                     
+
+
+SQL> --But by using keywork join & on is used for equi join::
+
+SQL> 
+SQL> --For equi join both table must have same attribute with identical value ,column name may be different but not for natural join::
+SQL> --In equi join the equality condition i.e. rollno is comming two times
+
+SQL> --It can be avoided by natural join::
+
+SQL> --In natural join relation column in both the table must be same ::
+SQL> --If no column have identical name in both the table then it is same as CROSS join.
+SQL> 
+SQL> 
+SQL> --NATURAL JOIN
+SQL> 
+SQL> select *from student natural join library;
+
+    ROLLNO NAME       BRA BOOK                                                  
+---------- ---------- --- -------                                               
+        22 diya       IT  DBMS                                                  
+        33 miya       IT  PYTHON                                                
+
+SQL> --IT will just remove rollno of library column
+SQL> spool off;

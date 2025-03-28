@@ -1,0 +1,246 @@
+SQL> "DCL Command"
+
+SQL> Use to control or to access the Data base;
+
+SQL> create user vishal identified by agnihotri;
+User created.
+
+SQL> ahnihotri is passward;
+
+
+SQL> connect vishal
+ERROR:
+ORA-01045: user VISHAL lacks CREATE SESSION privilege; logon denied 
+
+SQL> --we had to grant permission;
+SQL> --As i had to connect with another user Id so, Now i am no longer connected to Admin system so we had to connect system again;
+SQL> connect system;
+Connected.
+SQL> 
+SQL> 
+SQL> grant connect to vishal;
+
+Grant succeeded.
+
+SQL> --we can also use "grant CREATE SESSION TO VISHAL";
+
+SQL> connect vishal;
+Connected.
+
+SQL> --Now we are connected;
+SQL> --To new user;
+SQL> select *from tab;
+
+no rows selected
+
+SQL> create table student (sn number(3));
+create table student (sn number(3))
+*
+ERROR at line 1:
+ORA-01031: insufficient privileges 
+
+
+SQL> --Again we had to grant for creating table for new user;
+SQL> 
+SQL> 
+SQL> connect system;
+Connected.
+SQL> grant create table to vishal;
+
+Grant succeeded.
+
+SQL> --We also give him another privileges for memory, space....
+SQL> --while giving him one by one permission we will directly give him all the permission by;
+SQL> grant resource to vishal;
+
+Grant succeeded.
+
+SQL> connect vishal;
+Connected.
+
+SQL> create table student (sn number(3));
+
+Table created.
+
+SQL> desc student;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SN                                                 NUMBER(3)
+
+SQL> select *from tab;
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+STUDENT                        TABLE                                            
+
+SQL> --Try to revoke the permission;
+SQL> 
+SQL> 
+SQL> connect system;
+Connected.
+SQL> revoke resource from vishal;
+
+Revoke succeeded.
+
+SQL> revoke create table from vishal;
+
+Revoke succeeded.
+
+SQL> connect vishal;
+Connected.
+
+SQL> create table student1 (sn number(3));
+create table student1 (sn number(3))
+*
+ERROR at line 1:
+ORA-01031: insufficient privileges 
+
+
+SQL> --As i revoke to create and resource so it can't performe this command;
+SQL> 
+SQL> 
+SQL> connect system
+Connected.
+SQL> grant create table to vishal;
+
+Grant succeeded.
+
+SQL> grant resource to vishal;
+
+Grant succeeded.
+
+SQL> dba command is used to make a new user as a data base administrator:
+
+SQL> grant dba to vishal;
+
+Grant succeeded.
+
+SQL> grant connect,resource,dba to vishal;
+
+Grant succeeded.
+
+SQL> --Grant permission in same line;
+SQL> connect vishal;
+Connected.
+SQL> select *from tab;
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+STUDENT                        TABLE                                            
+
+SQL> connect system;
+Connected.
+
+SQL> create user aryan identified by kindu;
+
+User created.
+
+SQL> --To list all the user from the System:
+
+
+SQL> select * from all_users;
+
+USERNAME                          USER_ID CREATED                               
+------------------------------ ---------- ---------                             
+XS$NULL                        2147483638 29-MAY-14                             
+ARYAN                                  49 23-OCT-24                             
+VISHAL                                 48 23-OCT-24                             
+APEX_040000                            47 29-MAY-14                             
+APEX_PUBLIC_USER                       45 29-MAY-14                             
+FLOWS_FILES                            44 29-MAY-14                             
+HR                                     43 29-MAY-14                             
+MDSYS                                  42 29-MAY-14                             
+ANONYMOUS                              35 29-MAY-14                             
+XDB                                    34 29-MAY-14                             
+CTXSYS                                 32 29-MAY-14                             
+
+USERNAME                          USER_ID CREATED                               
+------------------------------ ---------- ---------                             
+APPQOSSYS                              30 29-MAY-14                             
+DBSNMP                                 29 29-MAY-14                             
+ORACLE_OCM                             21 29-MAY-14                             
+DIP                                    14 29-MAY-14                             
+OUTLN                                   9 29-MAY-14                             
+SYSTEM                                  5 29-MAY-14                             
+SYS                                     0 29-MAY-14                             
+
+18 rows selected.
+
+SQL> --It will list all available user;
+SQL> --To dlt a User;
+SQL> drop user aryan;
+
+User dropped.
+
+SQL> select * from all_users;
+
+USERNAME                          USER_ID CREATED                               
+------------------------------ ---------- ---------                             
+XS$NULL                        2147483638 29-MAY-14                             
+VISHAL                                 48 23-OCT-24                             
+APEX_040000                            47 29-MAY-14                             
+APEX_PUBLIC_USER                       45 29-MAY-14                             
+FLOWS_FILES                            44 29-MAY-14                             
+HR                                     43 29-MAY-14                             
+MDSYS                                  42 29-MAY-14                             
+ANONYMOUS                              35 29-MAY-14                             
+XDB                                    34 29-MAY-14                             
+CTXSYS                                 32 29-MAY-14                             
+APPQOSSYS                              30 29-MAY-14                             
+
+USERNAME                          USER_ID CREATED                               
+------------------------------ ---------- ---------                             
+DBSNMP                                 29 29-MAY-14                             
+ORACLE_OCM                             21 29-MAY-14                             
+DIP                                    14 29-MAY-14                             
+OUTLN                                   9 29-MAY-14                             
+SYSTEM                                  5 29-MAY-14                             
+SYS                                     0 29-MAY-14                             
+
+17 rows selected.
+
+SQL> drop user vishal;
+drop user vishal
+*
+ERROR at line 1:
+ORA-01922: CASCADE must be specified to drop 'VISHAL' 
+
+
+SQL> --As kindu user has just created with no object and no permission so , it can be droped :
+SQL> --But vishal user can't , To dlt vishal user also we had to dlt all object;
+SQL> 
+SQL> --1st Option -->Connect with vishal then dlt all schema then we will drop this vishal user;
+SQL> --2nd Option and best option is by using this command ::
+SQL> 
+SQL> 
+SQL> drop user vishal cascade;
+
+User dropped.
+
+SQL> select *from all_users;
+
+USERNAME                          USER_ID CREATED                               
+------------------------------ ---------- ---------                             
+XS$NULL                        2147483638 29-MAY-14                             
+APEX_040000                            47 29-MAY-14                             
+APEX_PUBLIC_USER                       45 29-MAY-14                             
+FLOWS_FILES                            44 29-MAY-14                             
+HR                                     43 29-MAY-14                             
+MDSYS                                  42 29-MAY-14                             
+ANONYMOUS                              35 29-MAY-14                             
+XDB                                    34 29-MAY-14                             
+CTXSYS                                 32 29-MAY-14                             
+APPQOSSYS                              30 29-MAY-14                             
+DBSNMP                                 29 29-MAY-14                             
+
+USERNAME                          USER_ID CREATED                               
+------------------------------ ---------- ---------                             
+ORACLE_OCM                             21 29-MAY-14                             
+DIP                                    14 29-MAY-14                             
+OUTLN                                   9 29-MAY-14                             
+SYSTEM                                  5 29-MAY-14                             
+SYS                                     0 29-MAY-14                             
+
+16 rows selected.
+
+SQL> spool off;

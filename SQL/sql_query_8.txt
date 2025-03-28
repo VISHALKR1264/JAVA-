@@ -1,0 +1,402 @@
+SQL> --Some of String & Number OPERATION
+SQL> 
+SQL> 
+SQL> create table employee (eno number(4),ename varchar(20),salary number(10,3), dno number(4));
+
+Table created.
+
+SQL> insert into employee values (110,'ruchika   ',25550.54,-44);
+
+1 row created.
+
+SQL> insert into employee values (101,'supriya',40000.54,34);
+
+1 row created.
+ 
+SQL> insert into employee values (106,'   rohan',36000.45,-55);
+
+1 row created.
+
+SQL> insert into employee values (102,'parul',42000.30,33);
+
+1 row created.
+
+SQL> select *from employee;
+
+       ENO ENAME                    SALARY        DNO                           
+---------- -------------------- ---------- ----------                           
+       110 ruchika                25550.54        -44                           
+       101 supriya                40000.54         34                           
+       106    rohan               36000.45        -55                           
+       102 parul                   42000.3         33                           
+
+SQL> --Operation on String and number attribute going to apply;
+SQL> CONCATINATE
+SQL> 
+SQL> select concat(eno,ename) from employee;
+
+CONCAT(ENO,ENAME)                                                               
+------------------------------------------------------------                    
+110ruchika                                                                      
+101supriya                                                                      
+106   rohan                                                                     
+102parul                                                                        
+
+SQL> select concat(eno,ename)as eno_ename from employee;
+
+ENO_ENAME                                                                       
+------------------------------------------------------------                    
+110ruchika                                                                      
+101supriya                                                                      
+106   rohan                                                                     
+102parul                                                                        
+
+SQL> --If we had to Concatenate more than 2 attribute;
+SQL> --We had to do NESTING
+
+SQL> select concat(concat(eno,ename),salary) from employee;
+
+CONCAT(CONCAT(ENO,ENAME),SALARY)                                                
+--------------------------------------------------------------------------------
+110ruchika   25550.54                                                           
+101supriya40000.54                                                              
+106   rohan36000.45                                                             
+102parul42000.3                                                                 
+
+SQL> select concat(concat(eno,ename),salary) as allconcat from employee;
+
+ALLCONCAT                                                                       
+--------------------------------------------------------------------------------
+110ruchika   25550.54                                                           
+101supriya40000.54                                                              
+106   rohan36000.45                                                             
+102parul42000.3                                                                 
+
+SQL> --SUBSTRING OPERATION
+SQL> --For any portion of concatination ;
+SQL> 
+
+
+SQL> select substr (ename,1,4) from employee;
+
+SUBSTR(ENAME,1,4                                                                
+----------------                                                                
+ruch                                                                            
+supr                                                                            
+   r                                                                            
+paru                                                                            
+
+SQL> select substr (ename,2,4) from employee;
+
+SUBSTR(ENAME,2,4                                                                
+----------------                                                                
+uchi                                                                            
+upri                                                                            
+  ro                                                                            
+arul                                                                            
+
+SQL> --If want to do substring of salary then we fist have to convert number to string then only;
+SQL> --CHECK PARTICULAR IS PART OF STRING then it will return INDEX of substring;
+SQL> select instr (ename,'u') from employee;
+
+INSTR(ENAME,'U')                                                                
+----------------                                                                
+               2                                                                
+               2                                                                
+               0                                                                
+               4                                                                
+
+SQL> --Returned Index of 'U';
+SQL> select instr (ename,'aa') from employee;
+
+INSTR(ENAME,'AA')                                                               
+-----------------                                                               
+                0                                                               
+                0                                                               
+                0                                                               
+                0                                                               
+
+SQL> select instr (ename,'ya') from employee;
+
+INSTR(ENAME,'YA')                                                               
+-----------------                                                               
+                0                                                               
+                6                                                               
+                0                                                               
+                0                                                               
+
+SQL> --Index of SUBSTRING
+SQL> --RIGHT-PADDING && LEFT-PADDING;
+SQL> --To make every string size equal , by filling rest space by any symbol;
+SQL> select rpad(ename,10,'#') from employee;
+
+RPAD(ENAME,10,'#')                                                              
+----------------------------------------                                        
+ruchika                                                                         
+supriya###                                                                      
+   rohan##                                                                      
+parul#####                                                                      
+
+SQL> select rpad(ename,11,'#') from employee;
+
+RPAD(ENAME,11,'#')                                                              
+--------------------------------------------                                    
+ruchika   #                                                                     
+supriya####                                                                     
+   rohan###                                                                     
+parul######                                                                     
+
+SQL> select lpad(ename,11,'#') from employee;
+
+LPAD(ENAME,11,'#')                                                              
+--------------------------------------------                                    
+#ruchika                                                                        
+####supriya                                                                     
+###   rohan                                                                     
+######parul                                                                     
+
+SQL> --To remove extra blank spaces from right or left;
+SQL> select ltrim(ename) from employee;
+
+LTRIM(ENAME)                                                                    
+--------------------                                                            
+ruchika                                                                         
+supriya                                                                         
+rohan                                                                           
+parul                                                                           
+
+SQL> select rtrim(ename) from employee;
+
+RTRIM(ENAME)                                                                    
+--------------------                                                            
+ruchika                                                                         
+supriya                                                                         
+   rohan                                                                        
+parul                                                                           
+
+SQL> select rtrim(ltrim(ename)) from employee;
+
+RTRIM(LTRIM(ENAME))                                                             
+--------------------                                                            
+ruchika                                                                         
+supriya                                                                         
+rohan                                                                           
+parul                                                                           
+
+SQL> --NUMERICAL OPERATIONS
+SQL> 
+SQL> select *from employee;
+
+       ENO ENAME                    SALARY        DNO                           
+---------- -------------------- ---------- ----------                           
+       110 ruchika                25550.54        -44                           
+       101 supriya                40000.54         34                           
+       106    rohan               36000.45        -55                           
+       102 parul                   42000.3         33                           
+
+SQL> --For aggregate operation;
+SQL> --take place in complete column;
+SQL> select sum(salary) from employee;
+
+SUM(SALARY)                                                                     
+-----------                                                                     
+  143551.83                                                                     
+
+SQL> select avg(salary) from employee;
+
+AVG(SALARY)                                                                     
+-----------                                                                     
+ 35887.9575                                                                     
+
+SQL> --For specific row;
+SQL> select (salary/2) from employee;
+
+(SALARY/2)                                                                      
+----------                                                                      
+  12775.27                                                                      
+  20000.27                                                                      
+ 18000.225                                                                      
+  21000.15                                                                      
+
+SQL> select (salary+202) from employee;
+
+(SALARY+202)                                                                    
+------------                                                                    
+    25752.54                                                                    
+    40202.54                                                                    
+    36202.45                                                                    
+     42202.3                                                                    
+
+SQL> select (salary+202*80) from employee;
+
+(SALARY+202*80)                                                                 
+---------------                                                                 
+       41710.54                                                                 
+       56160.54                                                                 
+       52160.45                                                                 
+        58160.3                                                                 
+
+SQL> select mod(salary,dno) from employee;
+
+MOD(SALARY,DNO)                                                                 
+---------------                                                                 
+          30.54                                                                 
+          16.54                                                                 
+          30.45                                                                 
+           24.3                                                                 
+
+SQL> select mod(salary,100) from employee;
+
+MOD(SALARY,100)                                                                 
+---------------                                                                 
+          50.54                                                                 
+            .54                                                                 
+            .45                                                                 
+             .3                                                                 
+
+SQL> --These specific row operation are not aggregrate operation as aggregrate operation works on whole table column
+SQL> 
+SQL> select mod(sum(salary),100) from employee;
+
+MOD(SUM(SALARY),100)                                                            
+--------------------                                                            
+               51.83                                                            
+
+SQL> select sqrt(salary) from employee;
+
+SQRT(SALARY)                                                                    
+------------                                                                    
+  159.845363                                                                    
+   200.00135                                                                    
+  189.737845                                                                    
+  204.939747                                                                    
+
+SQL> select (dno) from employee;
+
+       DNO                                                                      
+----------                                                                      
+       -44                                                                      
+        34                                                                      
+       -55                                                                      
+        33                                                                      
+
+SQL> select abs(dno) from employee;
+
+  ABS(DNO)                                                                      
+----------                                                                      
+        44                                                                      
+        34                                                                      
+        55                                                                      
+        33                                                                      
+
+SQL> --These operation is not modifying the original table it's just giving the result;
+SQL> 
+SQL> --Table will only change when we will UPDATE the entries;
+
+SQL> update employee set dno=44 where eno=110;
+
+1 row updated.
+
+SQL> select (dno) from employee;
+
+       DNO                                                                      
+----------                                                                      
+        44                                                                      
+        34                                                                      
+       -55                                                                      
+        33                                                                      
+
+SQL> --ROUND OFF
+SQL> select salary from employee;
+
+    SALARY                                                                      
+----------                                                                      
+  25550.54                                                                      
+  40000.54                                                                      
+  36000.45                                                                      
+   42000.3                                                                      
+
+SQL> select ceil(salary) from employee;
+
+CEIL(SALARY)                                                                    
+------------                                                                    
+       25551                                                                    
+       40001                                                                    
+       36001                                                                    
+       42001                                                                    
+
+SQL> select floor(salary) from employee;
+
+FLOOR(SALARY)                                                                   
+-------------                                                                   
+        25550                                                                   
+        40000                                                                   
+        36000                                                                   
+        42000                                                                   
+
+SQL> --LIKE
+SQL> select *from employee;
+
+       ENO ENAME                    SALARY        DNO                           
+---------- -------------------- ---------- ----------                           
+       110 ruchika                25550.54         44                           
+       101 supriya                40000.54         34                           
+       106    rohan               36000.45        -55                           
+       102 parul                   42000.3         33                           
+
+SQL> select *from employee where ename like 'r%';
+
+       ENO ENAME                    SALARY        DNO                           
+---------- -------------------- ---------- ----------                           
+       110 ruchika                25550.54         44                           
+
+SQL> select *from employee where ename like 'ro%';
+
+no rows selected
+
+SQL> select *from employee where ename like '   r%';
+
+       ENO ENAME                    SALARY        DNO                           
+---------- -------------------- ---------- ----------                           
+       106    rohan               36000.45        -55                           
+
+SQL> select *from employee where ename like '%h%';
+
+       ENO ENAME                    SALARY        DNO                           
+---------- -------------------- ---------- ----------                           
+       110 ruchika                25550.54         44                           
+       106    rohan               36000.45        -55                           
+
+
+
+SQL> select *from employee where ename like 'r_%';
+
+       ENO ENAME                    SALARY        DNO                           
+---------- -------------------- ---------- ----------                           
+       110 ruchika                25550.54         44                           
+
+SQL> select *from employee where ename like 'r__%';
+
+       ENO ENAME                    SALARY        DNO                           
+---------- -------------------- ---------- ----------                           
+       110 ruchika                25550.54         44                           
+
+SQL> select *from employee where ename like 'r______%';
+
+       ENO ENAME                    SALARY        DNO                           
+---------- -------------------- ---------- ----------                           
+       110 ruchika                25550.54         44                           
+
+
+SQL> select *from employee where ename like 'r__';
+
+no rows selected
+
+
+SQL> select *from employee where ename like 'p_%';
+
+       ENO ENAME                    SALARY        DNO                           
+---------- -------------------- ---------- ----------                           
+       102 parul                   42000.3         33                           
+
+SQL> spool off;

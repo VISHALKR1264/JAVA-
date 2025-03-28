@@ -1,0 +1,139 @@
+SQL> 
+SQL> --SUBQUERY
+SQL> 
+SQL> A query within a query
+SQL> The outer query is known as MAIN QUERY ,and the inner query is known as SUBQUERY
+SP2-0734: unknown command beginning "The outer ..." - rest of line ignored.
+
+
+
+SQL> --BY the help of ALL,ANY,IN,EXIST
+SQL> --Exist cannot be used without subquery ,thats way we are using it here
+SQL> --We also use subquery with the help of group by clause::
+SQL> 
+SQL> 
+SQL> --The subquery generally executed first, and its output is used to complete the query condition for the main query.
+SQL> 
+SQL> 
+
+SQL> select *from project;
+
+       PNO        ENO                                                           
+---------- ----------                                                           
+       111        432                                                           
+       333        250                                                           
+       222        301                                                           
+       333        432                                                           
+
+SQL> select *from emp;
+
+       ENO ENAME          SALARY DEP                                            
+---------- ---------- ---------- ---                                            
+       120 Arun            45000 IT                                             
+       301 Don             65000 IT                                             
+       235 Soni            34000 IT                                             
+       313 Ravi            65000 IT                                             
+       250 Faruk           54000 CSE                                            
+       432 Emili           45030 CSE                                            
+       200 Queen           56000 CSE                                            
+
+7 rows selected.
+
+SQL> desc emp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ENO                                                NUMBER(3)
+ ENAME                                              VARCHAR2(10)
+ SALARY                                             NUMBER(10)
+ DEPT                                               VARCHAR2(3)
+
+SQL> alter table emp add primary Key(eno);
+
+Table altered.
+
+SQL> alter table project add constraint f_k foreign Key(eno) references emp(eno);
+
+Table altered.
+
+SQL> --@@ TO extact the record from EMP for the enployee working with any project.
+SQL> --@@ To extract the record from of the employee not working with any project..
+SQL> 
+SQL> 
+SQL> 
+SQL> --We USE EXIST:::
+SQL> 
+
+
+SQL> select *from emp where EXISTS (select eno from project where emp.eno=project.eno);
+
+       ENO ENAME          SALARY DEP                                            
+---------- ---------- ---------- ---                                            
+       432 Emili           45030 CSE                                            
+       250 Faruk           54000 CSE                                            
+       301 Don             65000 IT                                             
+
+SQL> select *from emp,project where EXISTS (select eno from project where emp.eno=project.eno);
+
+       ENO ENAME          SALARY DEP        PNO        ENO                      
+---------- ---------- ---------- --- ---------- ----------                      
+       301 Don             65000 IT         333        432                      
+       301 Don             65000 IT         222        301                      
+       301 Don             65000 IT         333        250                      
+       301 Don             65000 IT         111        432                      
+       250 Faruk           54000 CSE        333        432                      
+       250 Faruk           54000 CSE        222        301                      
+       250 Faruk           54000 CSE        333        250                      
+       250 Faruk           54000 CSE        111        432                      
+       432 Emili           45030 CSE        333        432                      
+       432 Emili           45030 CSE        222        301                      
+       432 Emili           45030 CSE        333        250                      
+
+       ENO ENAME          SALARY DEP        PNO        ENO                      
+---------- ---------- ---------- --- ---------- ----------                      
+       432 Emili           45030 CSE        111        432                      
+
+12 rows selected.
+
+SQL> select *from emp where NOT EXISTS (select eno from project where emp.eno=project.eno);
+
+       ENO ENAME          SALARY DEP                                            
+---------- ---------- ---------- ---                                            
+       235 Soni            34000 IT                                             
+       200 Queen           56000 CSE                                            
+       313 Ravi            65000 IT                                             
+       120 Arun            45000 IT                                             
+
+
+
+SQL> select *from emp where eno IN(select eno from project where emp.eno=project.eno);
+
+       ENO ENAME          SALARY DEP                                            
+---------- ---------- ---------- ---                                            
+       432 Emili           45030 CSE                                            
+       250 Faruk           54000 CSE                                            
+       301 Don             65000 IT                                             
+
+SQL> select *from emp where eno IN(select eno from project);
+
+       ENO ENAME          SALARY DEP                                            
+---------- ---------- ---------- ---                                            
+       432 Emili           45030 CSE                                            
+       250 Faruk           54000 CSE                                            
+       301 Don             65000 IT                                             
+
+
+SQL> select *from emp where eno = ANY(select eno from project);
+
+       ENO ENAME          SALARY DEP                                            
+---------- ---------- ---------- ---                                            
+       432 Emili           45030 CSE                                            
+       250 Faruk           54000 CSE                                            
+       301 Don             65000 IT                                             
+
+SQL> select *from emp where eno = ALL(select eno from project);
+
+no rows selected
+
+SQL> --We can also use simple JOIN like equi,natural...to Fetch these reult and also join operation are less time consuming than this Subquery and less complex.
+SQL> 
+SQL> spool off;

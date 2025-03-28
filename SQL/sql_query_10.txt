@@ -1,0 +1,146 @@
+SQL> SET OPERATIONS::--->>>
+
+SQL> 
+SQL> --UNION , UNION ALL ,INTERSECT ...
+SQL>  create table sec1(name varchar(3), city varchar(3));
+
+Table created.
+
+SQL>  create table sec2(name varchar(3), city varchar(3));
+
+Table created.
+
+SQL> insert into sec1 values('aaa','YNR');
+
+1 row created.
+
+SQL> insert into sec1 values('ddd','PNB');
+
+1 row created.
+
+SQL> insert into sec1 values('sss','YNR');
+
+1 row created.
+
+SQL> insert into sec1 values('eee','PNB');
+
+1 row created.
+
+SQL> insert into sec2 values('aaa','YNR');
+
+1 row created.
+
+SQL> insert into sec2 values('eee','PNB');
+
+1 row created.
+
+SQL> select *from sec1;
+
+NAM CIT                                                                         
+--- ---                                                                         
+aaa YNR                                                                         
+ddd PNB                                                                         
+sss YNR                                                                         
+eee PNB                                                                         
+
+SQL> select *from sec2;
+
+NAM CIT                                                                         
+--- ---                                                                         
+aaa YNR                                                                         
+eee PNB                                                                         
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select *from sec1
+  2  union
+  3  select *from sec2;
+
+NAM CIT                                                                         
+--- ---                                                                         
+aaa YNR                                                                         
+ddd PNB                                                                         
+eee PNB                                                                         
+sss YNR                                                                         
+
+SQL> select *from sec1
+  2  union all
+  3  select *from sec2;
+
+NAM CIT                                                                         
+--- ---                                                                         
+aaa YNR                                                                         
+ddd PNB                                                                         
+sss YNR                                                                         
+eee PNB                                                                         
+aaa YNR                                                                         
+eee PNB                                                                         
+
+6 rows selected.
+
+SQL> update sec2 set city='NEW' where name='eee';
+
+1 row updated.
+
+SQL> select *from sec2;
+
+NAM CIT                                                                         
+--- ---                                                                         
+aaa YNR                                                                         
+eee NEW                                                                         
+
+SQL> select *from sec1;
+
+NAM CIT                                                                         
+--- ---                                                                         
+aaa YNR                                                                         
+ddd PNB                                                                         
+sss YNR                                                                         
+eee PNB                                                                         
+
+SQL> select *from sec1
+  2  union
+  3  select *from sec2;
+
+NAM CIT                                                                         
+--- ---                                                                         
+aaa YNR                                                                         
+ddd PNB                                                                         
+eee NEW                                                                         
+eee PNB                                                                         
+sss YNR                                                                         
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select *from sec2
+  2  intersect
+  3  select *from sec1;
+
+NAM CIT                                                                         
+--- ---                                                                         
+aaa YNR                                                                         
+
+SQL> select *from sec1
+  2  minus
+  3  select *from sec2;
+
+NAM CIT                                                                         
+--- ---                                                                         
+ddd PNB                                                                         
+eee PNB                                                                         
+sss YNR                                                                         
+
+SQL> --IT will give the distinct RECORDS::
+SQL> select *from sec2
+  2  minus
+  3  select *from sec1;
+
+NAM CIT                                                                         
+--- ---                                                                         
+eee NEW                                                                         
+
+SQL> spool off;

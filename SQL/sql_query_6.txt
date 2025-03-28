@@ -1,0 +1,191 @@
+SQL> --TRANSACTIONAL CONTROL LANGUAGE
+SQL> --commit, rollback, save point, Set Transaction ,Set Constraints;
+SQL> --commit-->AFTER running commit all the changes which is done in the DATABASE is now permanent::
+SQL> --Save point -->checkpoint or like a mark before performing any transaction
+SQL> --RollBack-->If any transaction is performed by mistake we can roll back it to the save point::
+SQL> --Like UNDO
+
+
+SQL> select *from student;
+
+        RN      ADMNO NAME                        AGE                           
+---------- ---------- -------------------- ----------                           
+       100       2021 vishal                       22                           
+       101       2018 aryan                        18                           
+       103       2022 animesh                      24                           
+       104       2024 ashu                         25                           
+       106       2026 vishal Agnihotri             28                           
+       105       2025 yash                         25                           
+
+6 rows selected.
+
+
+SQL> --perform certain transaction with the table and try to roll  back
+SQL> --We can't roll back DDL command like create, drop, alter ..
+SQL> --we can only roll back data manipulation command (INSERT ,UPDATE ,DELETE..)::
+
+
+
+SQL> savepoint a1;
+
+Savepoint created.
+
+SQL> delete from student where admno = 2021;
+
+1 row deleted.
+
+SQL> select *from student;
+
+        RN      ADMNO NAME                        AGE                           
+---------- ---------- -------------------- ----------                           
+       101       2018 aryan                        18                           
+       103       2022 animesh                      24                           
+       104       2024 ashu                         25                           
+       106       2026 vishal Agnihotri             28                           
+       105       2025 yash                         25                           
+
+SQL> savepoint a2;
+
+Savepoint created.
+
+SQL> --If we create a series of savepoint then ,we can rollback upto any savepoint::
+SQL> delete from student where admno = 2024;
+
+1 row deleted.
+
+SQL> select *from student;
+
+        RN      ADMNO NAME                        AGE                           
+---------- ---------- -------------------- ----------                           
+       101       2018 aryan                        18                           
+       103       2022 animesh                      24                           
+       106       2026 vishal Agnihotri             28                           
+       105       2025 yash                         25                           
+
+SQL> --But think that i had delete it by mistake so i want to ROLLBACK it ::
+--->>>But if we had Truncate it alter than delete then, we can't roll-back::
+
+SQL> --ROLLBACK to a2;
+SQL> rollback to a2;
+
+Rollback complete.
+
+SQL> select *from student;
+
+        RN      ADMNO NAME                        AGE                           
+---------- ---------- -------------------- ----------                           
+       101       2018 aryan                        18                           
+       103       2022 animesh                      24                           
+       104       2024 ashu                         25                           
+       106       2026 vishal Agnihotri             28                           
+       105       2025 yash                         25                           
+
+SQL> --Deleted table is rollbacked::
+SQL> --We may roll back to any savepoint ::
+SQL> savepoint a3;
+
+Savepoint created.
+
+SQL> insert into student values(107,2020,'Manisha',20);
+
+1 row created.
+
+SQL> select *from student;
+
+        RN      ADMNO NAME                        AGE                           
+---------- ---------- -------------------- ----------                           
+       101       2018 aryan                        18                           
+       103       2022 animesh                      24                           
+       104       2024 ashu                         25                           
+       106       2026 vishal Agnihotri             28                           
+       107       2020 Manisha                      20                           
+       105       2025 yash                         25                           
+
+6 rows selected.
+
+SQL> --To undo this insert we just  had to UNDO or ROLLBACK::
+SQL> rollback to a3;
+
+Rollback complete.
+
+SQL> select *from student;
+
+        RN      ADMNO NAME                        AGE                           
+---------- ---------- -------------------- ----------                           
+       101       2018 aryan                        18                           
+       103       2022 animesh                      24                           
+       104       2024 ashu                         25                           
+       106       2026 vishal Agnihotri             28                           
+       105       2025 yash                         25                           
+
+SQL> --Insert command is rollbacked::
+SQL> savepoint a4;
+
+Savepoint created.
+
+
+SQL> update student set admno=5555 where rn=105;
+
+1 row updated.
+
+SQL> select *from student;
+
+        RN      ADMNO NAME                        AGE                           
+---------- ---------- -------------------- ----------                           
+       101       2018 aryan                        18                           
+       103       2022 animesh                      24                           
+       104       2024 ashu                         25                           
+       106       2026 vishal Agnihotri             28                           
+       105       5555 yash                         25                           
+
+SQL> rollback to a4;
+
+Rollback complete.
+
+SQL> select *from student;
+
+        RN      ADMNO NAME                        AGE                           
+---------- ---------- -------------------- ----------                           
+       101       2018 aryan                        18                           
+       103       2022 animesh                      24                           
+       104       2024 ashu                         25                           
+       106       2026 vishal Agnihotri             28                           
+       105       2025 yash                         25     
+
+
+
+                      
+
+SQL> --COMMIT::::::::::::::::::::::::::::::::::::::::::::
+SQL> savepoint a5;
+
+Savepoint created.
+
+SQL> update student set admno=3030 where rn=105;
+
+1 row updated.
+
+SQL> select *from student;
+
+        RN      ADMNO NAME                        AGE                           
+---------- ---------- -------------------- ----------                           
+       101       2018 aryan                        18                           
+       103       2022 animesh                      24                           
+       104       2024 ashu                         25                           
+       106       2026 vishal Agnihotri             28                           
+       105       3030 yash                         25                           
+
+SQL> commit;
+
+Commit complete.
+
+SQL> --IT IS commited::
+SQL> --Once we commited we can not roll back to its previous save point::
+SQL> rollback to a5;
+rollback to a5
+*
+ERROR at line 1:
+ORA-01086: savepoint 'A5' never established in this session or is invalid 
+
+
+SQL> spool off;

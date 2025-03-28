@@ -1,0 +1,81 @@
+
+SQL> --Theta/Non-equi Join --> (<,>,!=,etc)
+SQL> 
+SQL> 
+SQL> select *from student ,library ;
+
+    ROLLNO NAME       BRA     ROLLNO BOOK                                       
+---------- ---------- --- ---------- -------                                    
+        11 riya       CSE         22 DBMS                                       
+        22 diya       IT          22 DBMS                                       
+        33 miya       IT          22 DBMS                                       
+        11 riya       CSE         33 PYTHON                                     
+        22 diya       IT          33 PYTHON                                     
+        33 miya       IT          33 PYTHON                                     
+
+6 rows selected.
+
+SQL> cartesian product ::
+
+SQL> --ON the cartesian product we apply join conditions::
+SQL> 
+SQL> 
+SQL>  select *from student s inner join library l on s.rollno < l.rollno;
+
+    ROLLNO NAME       BRA     ROLLNO BOOK                                       
+---------- ---------- --- ---------- -------                                    
+        11 riya       CSE         22 DBMS                                       
+        11 riya       CSE         33 PYTHON                                     
+        22 diya       IT          33 PYTHON                                     
+
+SQL>  select *from student s join library l on s.rollno < l.rollno;
+
+    ROLLNO NAME       BRA     ROLLNO BOOK                                       
+---------- ---------- --- ---------- -------                                    
+        11 riya       CSE         22 DBMS                                       
+        11 riya       CSE         33 PYTHON                                     
+        22 diya       IT          33 PYTHON                                     
+
+SQL>  select *from student s join library l on s.rollno > l.rollno;
+
+    ROLLNO NAME       BRA     ROLLNO BOOK                                       
+---------- ---------- --- ---------- -------                                    
+        33 miya       IT          22 DBMS                                       
+
+SQL>  select *from student s join library l on s.rollno != l.rollno;
+
+    ROLLNO NAME       BRA     ROLLNO BOOK                                       
+---------- ---------- --- ---------- -------                                    
+        11 riya       CSE         22 DBMS                                       
+        33 miya       IT          22 DBMS                                       
+        11 riya       CSE         33 PYTHON                                     
+        22 diya       IT          33 PYTHON                                     
+
+SQL>  select s.rollno,name from student s join library l on s.rollno != l.rollno;
+
+    ROLLNO NAME                                                                 
+---------- ----------                                                           
+        11 riya                                                                 
+        33 miya                                                                 
+        11 riya                                                                 
+        22 diya                                                                 
+
+SQL>  select s.rollno,name,branch,book from student s join library l on s.rollno != l.rollno;
+
+    ROLLNO NAME       BRA BOOK                                                  
+---------- ---------- --- -------                                               
+        11 riya       CSE DBMS                                                  
+        33 miya       IT  DBMS                                                  
+        11 riya       CSE PYTHON                                                
+        22 diya       IT  PYTHON                                                
+
+SQL>  select s.rollno,l.rollno,name,branch,book from student s join library l on s.rollno != l.rollno;
+
+    ROLLNO     ROLLNO NAME       BRA BOOK                                       
+---------- ---------- ---------- --- -------                                    
+        11         22 riya       CSE DBMS                                       
+        33         22 miya       IT  DBMS                                       
+        11         33 riya       CSE PYTHON                                     
+        22         33 diya       IT  PYTHON                                     
+
+SQL> spool off;

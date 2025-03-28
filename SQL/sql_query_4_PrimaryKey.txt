@@ -1,0 +1,278 @@
+SQL> --Primary Key:
+SQL> create table temp(sn number(3), name varchar(10));
+
+Table created.
+
+SQL> desc temp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SN                                                 NUMBER(3)
+ NAME                                               VARCHAR2(10)
+
+SQL> drop table temp;
+
+Table dropped.
+
+SQL> create table temp(sn number(3) primary key, name varchar(10));
+
+Table created.
+
+SQL> desc temp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SN                                        NOT NULL NUMBER(3)
+ NAME                                               VARCHAR2(10)
+
+SQL> --Primary is'NOT NULL' & It doesn't contain DUPLICATE element::::    ORA-00001: unique constraint (SYSTEM.SYS_C007210) violated &  cannot insert NULL into ("SYSTEM"."STUDENT"."NAME")::
+
+SQL> drop table temp;
+
+Table dropped.
+
+SQL> create table temp(sn number(3)constraint pri_k primary key, name varchar(10));
+
+Table created.
+
+
+SQL> desc temp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SN                                        NOT NULL NUMBER(3)
+ NAME                                               VARCHAR2(10)
+
+SQL> select *from temp;
+
+no rows selected
+
+SQL> --Again primary key is created with a constraint name so easy to alter the table without affecting it's Schema::
+
+
+SQL> alter table temp drop constraint pri_k;
+
+Table altered.
+
+SQL> desc temp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SN                                                 NUMBER(3)
+ NAME                                               VARCHAR2(10)
+
+SQL> --Only Primary Key got deleted not the whole table schema::
+
+
+
+//-------------------------------------------------------------------------------.
+SQL> --To declare primary key after declearing the table ::
+
+SQL> desc temp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SN                                                 NUMBER(3)
+ NAME                                               VARCHAR2(10)
+
+SQL> select *from temp;
+
+no rows selected
+
+
+
+
+SQL> alter table temp add primary key (sn);
+--->>>alter table temp modify sn number(3) primary key;
+
+Table altered.
+
+SQL> desc temp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SN                                        NOT NULL NUMBER(3)
+ NAME                                               VARCHAR2(10)
+
+SQL> select *from temp;
+
+no rows selected
+
+SQL> drop table temp;
+
+Table dropped.
+
+SQL> create table temp(sn number(3), name varchar(10));
+
+Table created.
+
+SQL> alter table temp add constraint pri_k primary key(sn);
+
+Table altered.
+
+SQL> desc temp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SN                                        NOT NULL NUMBER(3)
+ NAME                                               VARCHAR2(10)
+
+SQL> drop table temp;
+
+Table dropped.
+
+SQL> --Define the constraint while creating the table::
+SQL> create table temp(sn number(3), name varchar(10),primary key (sn));
+
+Table created.
+
+SQL> desc temp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SN                                        NOT NULL NUMBER(3)
+ NAME                                               VARCHAR2(10)
+
+SQL> drop table temp;
+
+Table dropped.
+
+SQL> create table temp(sn number(3), name varchar(10),
+  2  primary key(sn));
+
+Table created.
+
+SQL> desc temp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SN                                        NOT NULL NUMBER(3)
+ NAME                                               VARCHAR2(10)
+
+SQL> drop table temp;
+
+Table dropped.
+
+
+
+
+SQL> create table temp(sn number(3), name varchar(10),
+  2  constraint pri_k primary key(sn));
+
+Table created.
+
+SQL> desc temp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SN                                        NOT NULL NUMBER(3)
+ NAME                                               VARCHAR2(10)
+
+SQL> insert into temp values ('&sn','&name');
+Enter value for sn: 11
+Enter value for name: vishal
+old   1: insert into temp values ('&sn','&name')
+new   1: insert into temp values ('11','vishal')
+
+1 row created.
+
+SQL> /
+Enter value for sn: 22
+Enter value for name: aryan
+old   1: insert into temp values ('&sn','&name')
+new   1: insert into temp values ('22','aryan')
+
+1 row created.
+
+SQL> /
+Enter value for sn: 33
+Enter value for name: ashu
+old   1: insert into temp values ('&sn','&name')
+new   1: insert into temp values ('33','ashu')
+
+1 row created.
+
+SQL> /
+Enter value for sn: 44
+Enter value for name: supriya
+old   1: insert into temp values ('&sn','&name')
+new   1: insert into temp values ('44','supriya')
+
+1 row created.
+
+SQL> /
+Enter value for sn: 55
+Enter value for name: sakshi 
+old   1: insert into temp values ('&sn','&name')
+new   1: insert into temp values ('55','sakshi ')
+
+1 row created.
+
+SQL> select *from temp;
+
+        SN NAME                                                                 
+---------- ----------                                                           
+        11 vishal                                                               
+        22 aryan                                                                
+        33 ashu                                                                 
+        44 supriya                                                              
+        55 sakshi                                                               
+
+SQL> desc temp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SN                                        NOT NULL NUMBER(3)
+ NAME                                               VARCHAR2(10)
+
+SQL> --As sn is Primary key so if we insert duplicate value then row will not be inserted ::
+SQL> insert into temp values ('&sn','&name');
+Enter value for sn: 11
+Enter value for name: agnihotri
+old   1: insert into temp values ('&sn','&name')
+new   1: insert into temp values ('11','agnihotri')
+insert into temp values ('11','agnihotri')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SYSTEM.PRI_K) violated 
+
+
+SQL> /
+Enter value for sn: 
+Enter value for name: arun
+old   1: insert into temp values ('&sn','&name')
+new   1: insert into temp values ('','arun')
+insert into temp values ('','arun')
+                         *
+ERROR at line 1:
+ORA-01400: cannot insert NULL into ("SYSTEM"."TEMP"."SN") 
+
+
+SQL> --NULL VALUE ERROR ::
+SQL> select *from temp;
+
+        SN NAME                                                                 
+---------- ----------                                                           
+        11 vishal                                                               
+        22 aryan                                                                
+        33 ashu                                                                 
+        44 supriya                                                              
+        55 sakshi                                                               
+
+SQL> spool off;
+
+
+--->>>ON DELETE CASCADE
+
+CREATE TABLE temp (
+    sn NUMBER(3) PRIMARY KEY,
+    name VARCHAR(50)
+);
+
+CREATE TABLE temp_child (
+    srno NUMBER(3),
+    course VARCHAR(10),
+    CONSTRAINT fk FOREIGN KEY (srno)
+        REFERENCES temp(sn)
+        ON DELETE CASCADE
+);
+
+INSERT INTO temp (sn, name) VALUES (1, 'Math');
+
+INSERT INTO temp_child (srno, course) VALUES (1, 'Algebra');
+INSERT INTO temp_child (srno, course) VALUES (1, 'Geometry');
+
+
+DELETE FROM temp WHERE sn = 1;
+
+The corresponding records in temp_child (those with srno = 1) will be automatically deleted.
+

@@ -1,0 +1,200 @@
+SQL> --Arithmetic Operation & Aggregate Function with DATABASE TABLE ::
+SQL> 
+SQL> 
+
+SQL> create table student (rollno number(3),name varchar(10),branch varchar(3),marks number(3));
+
+Table created.
+
+SQL> insert into student values(201,'riya','CSE',306);
+
+1 row created.
+
+SQL> insert into student values(306,'siya','IT',422);
+
+1 row created.
+
+SQL> insert into student values(234,'riya','ME',323);
+
+1 row created.
+
+SQL> insert into student values(145,'kiya','CSE',378);
+
+1 row created.
+
+SQL> insert into student values(313,'diya','IT',455);
+
+1 row created.
+
+SQL> insert into student values(330,'tiya','CSE',456);
+
+1 row created.
+
+SQL> select *from student;
+
+    ROLLNO NAME       BRA      MARKS                                            
+---------- ---------- --- ----------                                            
+       201 riya       CSE        306                                            
+       306 siya       IT         422                                            
+       234 riya       ME         323                                            
+       145 kiya       CSE        378                                            
+       313 diya       IT         455                                            
+       330 tiya       CSE        456                                            
+       432 jiya       IT         400                                            
+
+7 rows selected.
+
+SQL> select rollno,marks,marks+10 from student;
+
+    ROLLNO      MARKS   MARKS+10                                                
+---------- ---------- ----------                                                
+       201        306        316                                                
+       306        422        432                                                
+       234        323        333                                                
+       145        378        388                                                
+       313        455        465                                                
+       330        456        466                                                
+       432        400        410                                                
+
+7 rows selected.
+
+SQL> select rollno,marks,marks-10 from student;
+
+    ROLLNO      MARKS   MARKS-10                                                
+---------- ---------- ----------                                                
+       201        306        296                                                
+       306        422        412                                                
+       234        323        313                                                
+       145        378        368                                                
+       313        455        445                                                
+       330        456        446                                                
+       432        400        390                                                
+
+7 rows selected.
+
+SQL> select rollno,marks,marks*10,marks/20 from student;
+
+    ROLLNO      MARKS   MARKS*10   MARKS/20                                     
+---------- ---------- ---------- ----------                                     
+       201        306       3060       15.3                                     
+       306        422       4220       21.1                                     
+       234        323       3230      16.15                                     
+       145        378       3780       18.9                                     
+       313        455       4550      22.75                                     
+       330        456       4560       22.8                                     
+       432        400       4000         20                                     
+
+7 rows selected.
+
+SQL> select rollno,marks,mod(marks,20) from student;
+
+    ROLLNO      MARKS MOD(MARKS,20)                                             
+---------- ---------- -------------                                             
+       201        306             6                                             
+       306        422             2                                             
+       234        323             3                                             
+       145        378            18                                             
+       313        455            15                                             
+       330        456            16                                             
+       432        400             0                                             
+
+7 rows selected.
+
+SQL> --As my Acctual table is not changed so, How can i use therese value ::
+SQL> --We can store these values in new table ::
+SQL> 
+SQL> create table student_new (rollno,marks) as select rollno ,marks+10 from student;
+
+Table created.
+
+SQL> select *from student_new;
+
+    ROLLNO      MARKS                                                           
+---------- ----------                                                           
+       201        316                                                           
+       306        432                                                           
+       234        333                                                           
+       145        388                                                           
+       313        465                                                           
+       330        466                                                           
+       432        410                                                           
+
+7 rows selected.
+
+SQL> --AGGREGATE OPERATIONS::::
+SQL> select *from student;
+
+    ROLLNO NAME       BRA      MARKS                                            
+---------- ---------- --- ----------                                            
+       201 riya       CSE        306                                            
+       306 siya       IT         422                                            
+       234 riya       ME         323                                            
+       145 kiya       CSE        378                                            
+       313 diya       IT         455                                            
+       330 tiya       CSE        456                                            
+       432 jiya       IT         400                                            
+
+7 rows selected.
+
+SQL> select count(rollno) from student;
+
+COUNT(ROLLNO)                                                                   
+-------------                                                                   
+            7                                                                   
+
+SQL> select count(rollno),name from student;
+select count(rollno),name from student
+                     *
+ERROR at line 1:
+ORA-00937: not a single-group group function 
+SQL> --As a Aggregate function we can not club one value with a complete column::
+
+
+SQL> select count(rollno),count(name) from student;
+
+COUNT(ROLLNO) COUNT(NAME)                                                       
+------------- -----------                                                       
+            7           7                                                       
+
+SQL> select count(rollno),count(branch) from student;
+
+COUNT(ROLLNO) COUNT(BRANCH)                                                     
+------------- -------------                                                     
+            7             7                                                     
+
+SQL> select count(rollno),count(distinct(branch)) from student;
+
+COUNT(ROLLNO) COUNT(DISTINCT(BRANCH))                                           
+------------- -----------------------                                           
+            7                       3                                           
+
+SQL> --Gives distinct dept name only ::
+SQL> 
+
+SQL> select count(rollno),sum(marks)from student;
+
+COUNT(ROLLNO) SUM(MARKS)                                                        
+------------- ----------                                                        
+            7       2740                                                        
+
+SQL> select count(rollno),sum(marks)as Total_marks from student;
+
+COUNT(ROLLNO) TOTAL_MARKS                                                       
+------------- -----------                                                       
+            7        2740                                                       
+
+
+SQL> select count(rollno),sum(marks),min(marks),max(marks) from student;
+
+COUNT(ROLLNO) SUM(MARKS) MIN(MARKS) MAX(MARKS)                                  
+------------- ---------- ---------- ----------                                  
+            7       2740        306        456                                  
+
+
+SQL> select count(rollno),sum(marks),min(marks),max(marks) ,avg(marks) as "Avg" from student;
+
+COUNT(ROLLNO) SUM(MARKS) MIN(MARKS) MAX(MARKS)        Avg                       
+------------- ---------- ---------- ---------- ----------                       
+            7       2740        306        456 391.428571                       
+
+SQL> spool off;

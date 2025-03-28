@@ -1,0 +1,546 @@
+
+SQL> select *from tab;
+---------->>>>> to show all the tables on that database.
+---------->if 'tab' is a table name then it is used to retrieve all the column & rows from the table ,('*') is used as a wildcard to retrieve all without specifying individual column; 
+
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+AQ$DEF$_AQCALL                 VIEW                                             
+AQ$DEF$_AQERROR                VIEW                                             
+AQ$_DEF$_AQCALL_F              VIEW                                             
+AQ$_DEF$_AQERROR_F             VIEW                                             
+AQ$_INTERNET_AGENTS            TABLE                                            
+AQ$_INTERNET_AGENT_PRIVS       TABLE                                            
+AQ$_QUEUES                     TABLE                                            
+AQ$_QUEUE_TABLES               TABLE                                            
+AQ$_SCHEDULES                  TABLE                                            
+CATALOG                        SYNONYM                                          
+COL                            SYNONYM                                          
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+DEF$_AQCALL                    TABLE                                            
+DEF$_AQERROR                   TABLE                                            
+DEF$_CALLDEST                  TABLE                                            
+DEF$_DEFAULTDEST               TABLE                                            
+DEF$_DESTINATION               TABLE                                            
+DEF$_ERROR                     TABLE                                            
+DEF$_LOB                       TABLE                                            
+DEF$_ORIGIN                    TABLE                                            
+DEF$_PROPAGATOR                TABLE                                            
+DEF$_PUSHED_TRANSACTIONS       TABLE                                            
+HELP                           TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+LOGMNRC_DBNAME_UID_MAP         TABLE                                            
+LOGMNRC_GSBA                   TABLE                                            
+LOGMNRC_GSII                   TABLE                                            
+LOGMNRC_GTCS                   TABLE                                            
+LOGMNRC_GTLO                   TABLE                                            
+LOGMNRP_CTAS_PART_MAP          TABLE                                            
+LOGMNRT_MDDL$                  TABLE                                            
+LOGMNR_AGE_SPILL$              TABLE                                            
+LOGMNR_ATTRCOL$                TABLE                                            
+LOGMNR_ATTRIBUTE$              TABLE                                            
+LOGMNR_CCOL$                   TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+LOGMNR_CDEF$                   TABLE                                            
+LOGMNR_COL$                    TABLE                                            
+LOGMNR_COLTYPE$                TABLE                                            
+LOGMNR_DICTIONARY$             TABLE                                            
+LOGMNR_DICTSTATE$              TABLE                                            
+LOGMNR_ENC$                    TABLE                                            
+LOGMNR_ERROR$                  TABLE                                            
+LOGMNR_FILTER$                 TABLE                                            
+LOGMNR_GLOBAL$                 TABLE                                            
+LOGMNR_GT_TAB_INCLUDE$         TABLE                                            
+LOGMNR_GT_USER_INCLUDE$        TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+LOGMNR_GT_XID_INCLUDE$         TABLE                                            
+LOGMNR_ICOL$                   TABLE                                            
+LOGMNR_IND$                    TABLE                                            
+LOGMNR_INDCOMPART$             TABLE                                            
+LOGMNR_INDPART$                TABLE                                            
+LOGMNR_INDSUBPART$             TABLE                                            
+LOGMNR_INTEGRATED_SPILL$       TABLE                                            
+LOGMNR_KOPM$                   TABLE                                            
+LOGMNR_LOB$                    TABLE                                            
+LOGMNR_LOBFRAG$                TABLE                                            
+LOGMNR_LOG$                    TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+LOGMNR_LOGMNR_BUILDLOG         TABLE                                            
+LOGMNR_NTAB$                   TABLE                                            
+LOGMNR_OBJ$                    TABLE                                            
+LOGMNR_OPQTYPE$                TABLE                                            
+LOGMNR_PARAMETER$              TABLE                                            
+LOGMNR_PARTOBJ$                TABLE                                            
+LOGMNR_PROCESSED_LOG$          TABLE                                            
+LOGMNR_PROPS$                  TABLE                                            
+LOGMNR_REFCON$                 TABLE                                            
+LOGMNR_RESTART_CKPT$           TABLE                                            
+LOGMNR_RESTART_CKPT_TXINFO$    TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+LOGMNR_SEED$                   TABLE                                            
+LOGMNR_SESSION$                TABLE                                            
+LOGMNR_SESSION_ACTIONS$        TABLE                                            
+LOGMNR_SESSION_EVOLVE$         TABLE                                            
+LOGMNR_SPILL$                  TABLE                                            
+LOGMNR_SUBCOLTYPE$             TABLE                                            
+LOGMNR_TAB$                    TABLE                                            
+LOGMNR_TABCOMPART$             TABLE                                            
+LOGMNR_TABPART$                TABLE                                            
+LOGMNR_TABSUBPART$             TABLE                                            
+LOGMNR_TS$                     TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+LOGMNR_TYPE$                   TABLE                                            
+LOGMNR_UID$                    TABLE                                            
+LOGMNR_USER$                   TABLE                                            
+LOGSTDBY$APPLY_MILESTONE       TABLE                                            
+LOGSTDBY$APPLY_PROGRESS        TABLE                                            
+LOGSTDBY$EDS_TABLES            TABLE                                            
+LOGSTDBY$EVENTS                TABLE                                            
+LOGSTDBY$FLASHBACK_SCN         TABLE                                            
+LOGSTDBY$HISTORY               TABLE                                            
+LOGSTDBY$PARAMETERS            TABLE                                            
+LOGSTDBY$PLSQL                 TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+LOGSTDBY$SCN                   TABLE                                            
+LOGSTDBY$SKIP                  TABLE                                            
+LOGSTDBY$SKIP_SUPPORT          TABLE                                            
+LOGSTDBY$SKIP_TRANSACTION      TABLE                                            
+MVIEW$_ADV_AJG                 TABLE                                            
+MVIEW$_ADV_BASETABLE           TABLE                                            
+MVIEW$_ADV_CLIQUE              TABLE                                            
+MVIEW$_ADV_ELIGIBLE            TABLE                                            
+MVIEW$_ADV_EXCEPTIONS          TABLE                                            
+MVIEW$_ADV_FILTER              TABLE                                            
+MVIEW$_ADV_FILTERINSTANCE      TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+MVIEW$_ADV_FJG                 TABLE                                            
+MVIEW$_ADV_GC                  TABLE                                            
+MVIEW$_ADV_INFO                TABLE                                            
+MVIEW$_ADV_JOURNAL             TABLE                                            
+MVIEW$_ADV_LEVEL               TABLE                                            
+MVIEW$_ADV_LOG                 TABLE                                            
+MVIEW$_ADV_OUTPUT              TABLE                                            
+MVIEW$_ADV_PARAMETERS          TABLE                                            
+MVIEW$_ADV_PLAN                TABLE                                            
+MVIEW$_ADV_PRETTY              TABLE                                            
+MVIEW$_ADV_ROLLUP              TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+MVIEW$_ADV_SQLDEPEND           TABLE                                            
+MVIEW$_ADV_TEMP                TABLE                                            
+MVIEW$_ADV_WORKLOAD            TABLE                                            
+MVIEW_EVALUATIONS              VIEW                                             
+MVIEW_EXCEPTIONS               VIEW                                             
+MVIEW_FILTER                   VIEW                                             
+MVIEW_FILTERINSTANCE           VIEW                                             
+MVIEW_LOG                      VIEW                                             
+MVIEW_RECOMMENDATIONS          VIEW                                             
+MVIEW_WORKLOAD                 VIEW                                             
+OL$                            TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+OL$HINTS                       TABLE                                            
+OL$NODES                       TABLE                                            
+PRODUCT_PRIVS                  VIEW                                             
+PRODUCT_USER_PROFILE           SYNONYM                                          
+PUBLICSYN                      SYNONYM                                          
+REPCAT$_AUDIT_ATTRIBUTE        TABLE                                            
+REPCAT$_AUDIT_COLUMN           TABLE                                            
+REPCAT$_COLUMN_GROUP           TABLE                                            
+REPCAT$_CONFLICT               TABLE                                            
+REPCAT$_DDL                    TABLE                                            
+REPCAT$_EXCEPTIONS             TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+REPCAT$_EXTENSION              TABLE                                            
+REPCAT$_FLAVORS                TABLE                                            
+REPCAT$_FLAVOR_OBJECTS         TABLE                                            
+REPCAT$_GENERATED              TABLE                                            
+REPCAT$_GROUPED_COLUMN         TABLE                                            
+REPCAT$_INSTANTIATION_DDL      TABLE                                            
+REPCAT$_KEY_COLUMNS            TABLE                                            
+REPCAT$_OBJECT_PARMS           TABLE                                            
+REPCAT$_OBJECT_TYPES           TABLE                                            
+REPCAT$_PARAMETER_COLUMN       TABLE                                            
+REPCAT$_PRIORITY               TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+REPCAT$_PRIORITY_GROUP         TABLE                                            
+REPCAT$_REFRESH_TEMPLATES      TABLE                                            
+REPCAT$_REPCAT                 TABLE                                            
+REPCAT$_REPCATLOG              TABLE                                            
+REPCAT$_REPCOLUMN              TABLE                                            
+REPCAT$_REPGROUP_PRIVS         TABLE                                            
+REPCAT$_REPOBJECT              TABLE                                            
+REPCAT$_REPPROP                TABLE                                            
+REPCAT$_REPSCHEMA              TABLE                                            
+REPCAT$_RESOLUTION             TABLE                                            
+REPCAT$_RESOLUTION_METHOD      TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+REPCAT$_RESOLUTION_STATISTICS  TABLE                                            
+REPCAT$_RESOL_STATS_CONTROL    TABLE                                            
+REPCAT$_RUNTIME_PARMS          TABLE                                            
+REPCAT$_SITES_NEW              TABLE                                            
+REPCAT$_SITE_OBJECTS           TABLE                                            
+REPCAT$_SNAPGROUP              TABLE                                            
+REPCAT$_TEMPLATE_OBJECTS       TABLE                                            
+REPCAT$_TEMPLATE_PARMS         TABLE                                            
+REPCAT$_TEMPLATE_REFGROUPS     TABLE                                            
+REPCAT$_TEMPLATE_SITES         TABLE                                            
+REPCAT$_TEMPLATE_STATUS        TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+REPCAT$_TEMPLATE_TARGETS       TABLE                                            
+REPCAT$_TEMPLATE_TYPES         TABLE                                            
+REPCAT$_USER_AUTHORIZATIONS    TABLE                                            
+REPCAT$_USER_PARM_VALUES       TABLE                                            
+SQLPLUS_PRODUCT_PROFILE        TABLE                                            
+STUDENT                        TABLE                                            
+SYSCATALOG                     SYNONYM                                          
+SYSFILES                       SYNONYM                                          
+TAB                            SYNONYM                                          
+TABQUOTAS                      SYNONYM                                          
+
+175 rows selected.
+
+
+
+SQL> create table student (name varchar2(20),rollno number(10),branch varchar2(10));
+----->>>>Here insted of varchar we can use 'char' or 'character' but if char(10) is used and i had inserted 6 character then other 4 space is wasted but in varchar it is free;
+
+
+ 
+SQL> insert into student values ('&name','&rollno','&branch');
+Enter value for name: vishal
+Enter value for rollno: 80
+Enter value for branch: cse
+old   1: insert into student values ('&name','&rollno','&branch')
+new   1: insert into student values ('vishal ','80','cse')
+
+1 row created.
+
+SQL> /             ----> used to execute the last SQL command that was entered
+Enter value for name: yash
+Enter value for rollno: 188
+Enter value for branch: IT
+old   1: insert into student values ('&name','&rollno','&branch')
+new   1: insert into student values ('yash','188','IT')
+
+1 row created.
+
+SQL> INSERT INTO student VALUES ('Alice', 42, 'CS');
+
+
+
+Table created.
+
+SQL> select *from student;
+
+NAME                          ROLLNO BRANCH                                     
+------------------------- ---------- ----------                                 
+vishal                           103 CSE                                        
+yash                             101 CSE                                        
+animesh                          104 IT                                         
+sweeta                           102 IT                                         
+aryan                            105 PCM                                        
+
+SQL> --for creating replica from the existing table :
+SQL> create table student1 as select *from student;
+
+Table created.
+
+SQL> select *from student1;
+
+NAME                          ROLLNO BRANCH                                     
+------------------------- ---------- ----------                                 
+vishal                           103 CSE                                        
+yash                             101 CSE                                        
+animesh                          104 IT                                         
+sweeta                           102 IT                                         
+aryan                            105 PCM                                        
+
+
+SQL> insert into student1 values('amit','109','CSE');
+
+1 row created.
+
+SQL> select *from student1;
+
+NAME                          ROLLNO BRANCH                                     
+------------------------- ---------- ----------                                 
+vishal                           103 CSE                                        
+yash                             101 CSE                                        
+animesh                          104 IT                                         
+sweeta                           102 IT                                         
+aryan                            105 PCM                                        
+amit                             109 CSE                                        
+
+6 rows selected.
+
+SQL> create table student2 as select name,rollno from student1;       -->for creating table with some specific column;
+
+Table created.
+
+SQL> select *from student2;
+
+NAME                          ROLLNO                                            
+------------------------- ----------                                            
+vishal                           103                                            
+yash                             101                                            
+animesh                          104                                            
+sweeta                           102                                            
+aryan                            105                                            
+amit                             109                                            
+
+6 rows selected.
+
+SQL> drop table student2;
+
+Table dropped.
+
+SQL> select *from student2;
+select *from student2
+             *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> select *from student1;
+
+NAME                          ROLLNO BRANCH                                     
+------------------------- ---------- ----------                                 
+vishal                           103 CSE                                        
+yash                             101 CSE                                        
+animesh                          104 IT                                         
+sweeta                           102 IT                                         
+aryan                            105 PCM                                        
+amit                             109 CSE                                        
+
+6 rows selected.
+
+SQL> drop table student1;
+
+Table dropped.
+
+SQL> --for deleting perticualar row of the table :
+
+SQL> desc student;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ NAME                                               VARCHAR2(25)
+ ROLLNO                                             NUMBER(10)
+ BRANCH                                             VARCHAR2(10)
+
+SQL> create table student1 as select *from student;
+
+Table created.
+
+SQL> select *from student1;
+
+NAME                          ROLLNO BRANCH                                     
+------------------------- ---------- ----------                                 
+vishal                           103 CSE                                        
+yash                             101 CSE                                        
+animesh                          104 IT                                         
+sweeta                           102 IT                                         
+aryan                            105 PCM                                        
+
+SQL> desc student1;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ NAME                                               VARCHAR2(25)
+ ROLLNO                                             NUMBER(10)
+ BRANCH                                             VARCHAR2(10)
+
+
+
+SQL> delete from student1; -->> To delete all the record from the table
+
+5 rows deleted.
+
+SQL> desc student1;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ NAME                                               VARCHAR2(25)
+ ROLLNO                                             NUMBER(10)
+ BRANCH                                             VARCHAR2(10)
+
+SQL> select *from student1;
+
+no rows selected
+
+SQL> drop table  student1;
+
+Table dropped.
+
+SQL> create table student1 as select *from student;
+
+Table created.
+
+SQL> select *from student1;
+
+NAME                          ROLLNO BRANCH                                     
+------------------------- ---------- ----------                                 
+vishal                           103 CSE                                        
+yash                             101 CSE                                        
+animesh                          104 IT                                         
+sweeta                           102 IT                                         
+aryan                            105 PCM                                        
+
+
+------>To delete some specific record
+
+SQL> delete from student1 where rollno='103';
+
+1 row deleted.
+
+SQL> select *from student1;
+
+NAME                          ROLLNO BRANCH                                     
+------------------------- ---------- ----------                                 
+yash                             101 CSE                                        
+animesh                          104 IT                                         
+sweeta                           102 IT                                         
+aryan                            105 PCM                                        
+
+SQL> insert into student1 values('yash','103','IT');
+
+1 row created.
+
+SQL> select *from student1;
+
+NAME                          ROLLNO BRANCH                                     
+------------------------- ---------- ----------                                 
+yash                             101 CSE                                        
+animesh                          104 IT                                         
+sweeta                           102 IT                                         
+aryan                            105 PCM                                        
+yash                             103 IT                                         
+
+SQL> delete from student1 where name ='yash';
+
+2 rows deleted.
+
+SQL> select *from student1;
+
+NAME                          ROLLNO BRANCH                                     
+------------------------- ---------- ----------                                 
+animesh                          104 IT                                         
+sweeta                           102 IT                                         
+aryan                            105 PCM                                        
+
+SQL> /
+
+NAME                          ROLLNO BRANCH                                     
+------------------------- ---------- ----------                                 
+animesh                          104 IT                                         
+sweeta                           102 IT                                         
+aryan                            105 PCM                                        
+
+SQL> insert into student1 values('yash','103','IT');
+
+1 row created.
+
+SQL> insert into student1 values('yash','101','IT');
+
+1 row created.
+
+SQL> select *from student1;
+
+NAME                          ROLLNO BRANCH                                     
+------------------------- ---------- ----------                                 
+animesh                          104 IT                                         
+sweeta                           102 IT                                         
+aryan                            105 PCM                                        
+yash                             103 IT                                         
+yash                             101 IT                                         
+
+
+SQL> delete from student1 where name ='yash' and rollno='103';
+
+1 row deleted.
+
+SQL> select *from student1;
+
+NAME                          ROLLNO BRANCH                                     
+------------------------- ---------- ----------                                 
+animesh                          104 IT                                         
+sweeta                           102 IT                                         
+aryan                            105 PCM                                        
+yash                             101 IT                                         
+
+SQL> delete from student1 where name ='yash' and rollno='104';
+
+0 rows deleted.
+
+SQL> delete from student1 where rollno >= 101;
+
+4 rows deleted.
+
+SQL> select *from student1;
+
+no rows selected
+
+SQL> create table student1 as select *from student;
+create table student1 as select *from student
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> drop table  student1;
+
+Table dropped.
+
+SQL> create table student1 as select *from student;
+
+Table created.
+
+SQL> select *from student1;
+
+NAME                          ROLLNO BRANCH                                     
+------------------------- ---------- ----------                                 
+vishal                           103 CSE                                        
+yash                             101 CSE                                        
+animesh                          104 IT                                         
+sweeta                           102 IT                                         
+aryan                            105 PCM                                        
+
+SQL> delete from student1 where rollno >= 103;
+
+3 rows deleted.
+
+SQL> select *from student1;
+
+NAME                          ROLLNO BRANCH                                     
+------------------------- ---------- ----------                                 
+yash                             101 CSE                                        
+sweeta                           102 IT                                         
+
+SQL> spool off;

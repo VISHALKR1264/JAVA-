@@ -1,0 +1,205 @@
+SQL> select *from emp;
+
+       ENO ENAME          SALARY DEP                                            
+---------- ---------- ---------- ---                                            
+       120 Arun            45000 IT                                             
+       301 Don             65000 IT                                             
+       235 Soni            34000 IT                                             
+       313 Ravi            65000 IT                                             
+       250 Faruk           54000 CSE                                            
+       432 Emili           45030 CSE                                            
+       200 Queen           56000 CSE                                            
+
+7 rows selected.
+
+SQL> --LOGICAL OPERATOR
+SQL> 
+SQL> select *from emp where eno > 300 AND salary > 50000;
+
+       ENO ENAME          SALARY DEP                                            
+---------- ---------- ---------- ---                                            
+       301 Don             65000 IT                                             
+       313 Ravi            65000 IT                                             
+
+SQL> select *from emp where eno > 300 OR salary > 50000;
+
+       ENO ENAME          SALARY DEP                                            
+---------- ---------- ---------- ---                                            
+       301 Don             65000 IT                                             
+       313 Ravi            65000 IT                                             
+       250 Faruk           54000 CSE                                            
+       432 Emili           45030 CSE                                            
+       200 Queen           56000 CSE                                            
+
+SQL> select *from emp where eno > 300 and salary > 50000;
+
+       ENO ENAME          SALARY DEP                                            
+---------- ---------- ---------- ---                                            
+       301 Don             65000 IT                                             
+       313 Ravi            65000 IT                                             
+
+SQL> select *from emp where dept like 'I%';
+
+       ENO ENAME          SALARY DEP                                            
+---------- ---------- ---------- ---                                            
+       120 Arun            45000 IT                                             
+       301 Don             65000 IT                                             
+       235 Soni            34000 IT                                             
+       313 Ravi            65000 IT                                             
+
+SQL> select *from emp where dept like 'I_';
+
+       ENO ENAME          SALARY DEP                                            
+---------- ---------- ---------- ---                                            
+       120 Arun            45000 IT                                             
+       301 Don             65000 IT                                             
+       235 Soni            34000 IT                                             
+       313 Ravi            65000 IT                                             
+                                          
+
+SQL> select *from emp where  salary between 40000 and 50000;
+
+       ENO ENAME          SALARY DEP                                            
+---------- ---------- ---------- ---                                            
+       120 Arun            45000 IT                                             
+       432 Emili           45030 CSE                                            
+
+SQL> select *from emp where  salary >= 40000 and salary <= 50000;
+
+       ENO ENAME          SALARY DEP                                            
+---------- ---------- ---------- ---                                            
+       120 Arun            45000 IT                                             
+       432 Emili           45030 CSE 
+                                           
+
+SQL> select *from emp where dept NOT like 'I_';
+
+       ENO ENAME          SALARY DEP                                            
+---------- ---------- ---------- ---                                            
+       250 Faruk           54000 CSE                                            
+       432 Emili           45030 CSE                                            
+       200 Queen           56000 CSE                                            
+
+SQL> select *from emp where NOT dept like 'I%';
+
+       ENO ENAME          SALARY DEP                                            
+---------- ---------- ---------- ---                                            
+       250 Faruk           54000 CSE                                            
+       432 Emili           45030 CSE                                            
+       200 Queen           56000 CSE                                            
+
+SQL> select *from emp where  salary NOT between 40000 and 50000;
+
+       ENO ENAME          SALARY DEP                                            
+---------- ---------- ---------- ---                                            
+       301 Don             65000 IT                                             
+       235 Soni            34000 IT                                             
+       313 Ravi            65000 IT                                             
+       250 Faruk           54000 CSE                                            
+       200 Queen           56000 CSE                                            
+
+SQL> select *from emp where  salary >= 40000 and NOT salary <= 50000;
+
+       ENO ENAME          SALARY DEP                                            
+---------- ---------- ---------- ---                                            
+       301 Don             65000 IT                                             
+       313 Ravi            65000 IT                                             
+       250 Faruk           54000 CSE                                            
+       200 Queen           56000 CSE                                            
+
+SQL> select *from emp where dept like 'C_';
+
+no rows selected
+
+SQL> select *from emp where dept like 'C__';
+
+       ENO ENAME          SALARY DEP                                            
+---------- ---------- ---------- ---                                            
+       250 Faruk           54000 CSE                                            
+       432 Emili           45030 CSE                                            
+       200 Queen           56000 CSE                                            
+
+SQL> select *from emp where dept like 'C%';
+
+       ENO ENAME          SALARY DEP                                            
+---------- ---------- ---------- ---                                            
+       250 Faruk           54000 CSE                                            
+       432 Emili           45030 CSE                                            
+       200 Queen           56000 CSE                                            
+
+SQL> 
+SQL> 
+SQL> --ALL operator IT compare a value to all values in another value set.
+SQL> 
+SQL> select *from emp where salary > ALL(40000,50000);
+
+       ENO ENAME          SALARY DEP                                            
+---------- ---------- ---------- ---                                            
+       301 Don             65000 IT                                             
+       313 Ravi            65000 IT                                             
+       250 Faruk           54000 CSE                                            
+       200 Queen           56000 CSE                                            
+
+SQL> select *from emp where salary > 40000 AND salary > 50000;
+
+       ENO ENAME          SALARY DEP                                            
+---------- ---------- ---------- ---                                            
+       301 Don             65000 IT                                             
+       313 Ravi            65000 IT                                             
+       250 Faruk           54000 CSE                                            
+       200 Queen           56000 CSE                                            
+
+
+SQL> select *from emp where salary < ALL(40000,50000);
+
+       ENO ENAME          SALARY DEP                                            
+---------- ---------- ---------- ---                                            
+       235 Soni            34000 IT                                             
+
+SQL> select *from emp where salary > ANY(40000,50000);
+
+       ENO ENAME          SALARY DEP                                            
+---------- ---------- ---------- ---                                            
+       120 Arun            45000 IT                                             
+       301 Don             65000 IT                                             
+       313 Ravi            65000 IT                                             
+       250 Faruk           54000 CSE                                            
+       432 Emili           45030 CSE                                            
+       200 Queen           56000 CSE                                            
+
+6 rows selected.
+
+SQL> select *from emp where salary > 40000 OR salary > 50000;
+
+       ENO ENAME          SALARY DEP                                            
+---------- ---------- ---------- ---                                            
+       120 Arun            45000 IT                                             
+       301 Don             65000 IT                                             
+       313 Ravi            65000 IT                                             
+       250 Faruk           54000 CSE                                            
+       432 Emili           45030 CSE                                            
+       200 Queen           56000 CSE                                            
+
+6 rows selected.
+
+SQL> select *from emp where salary IN(45000,34000);
+
+       ENO ENAME          SALARY DEP                                            
+---------- ---------- ---------- ---                                            
+       120 Arun            45000 IT                                             
+       235 Soni            34000 IT                                             
+
+SQL> In is for equality condition ::
+SQL> 
+SQL> select *from emp where salary =45000 OR salary = 34000;
+
+       ENO ENAME          SALARY DEP                                            
+---------- ---------- ---------- ---                                            
+       120 Arun            45000 IT                                             
+       235 Soni            34000 IT                                             
+
+SQL> commit;
+
+Commit complete.
+
+SQL> spool off;

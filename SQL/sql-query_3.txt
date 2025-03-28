@@ -1,0 +1,541 @@
+SQL> clear screen;
+
+SQL> select *from tab;
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+AQ$DEF$_AQCALL                 VIEW                                             
+AQ$DEF$_AQERROR                VIEW                                             
+AQ$_DEF$_AQCALL_F              VIEW                                             
+AQ$_DEF$_AQERROR_F             VIEW                                             
+AQ$_INTERNET_AGENTS            TABLE                                            
+AQ$_INTERNET_AGENT_PRIVS       TABLE                                            
+AQ$_QUEUES                     TABLE                                            
+AQ$_QUEUE_TABLES               TABLE                                            
+AQ$_SCHEDULES                  TABLE                                            
+CATALOG                        SYNONYM                                          
+COL                            SYNONYM                                          
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+DEF$_AQCALL                    TABLE                                            
+DEF$_AQERROR                   TABLE                                            
+DEF$_CALLDEST                  TABLE                                            
+DEF$_DEFAULTDEST               TABLE                                            
+DEF$_DESTINATION               TABLE                                            
+DEF$_ERROR                     TABLE                                            
+DEF$_LOB                       TABLE                                            
+DEF$_ORIGIN                    TABLE                                            
+DEF$_PROPAGATOR                TABLE                                            
+DEF$_PUSHED_TRANSACTIONS       TABLE                                            
+HELP                           TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+LOGMNRC_DBNAME_UID_MAP         TABLE                                            
+LOGMNRC_GSBA                   TABLE                                            
+LOGMNRC_GSII                   TABLE                                            
+LOGMNRC_GTCS                   TABLE                                            
+LOGMNRC_GTLO                   TABLE                                            
+LOGMNRP_CTAS_PART_MAP          TABLE                                            
+LOGMNRT_MDDL$                  TABLE                                            
+LOGMNR_AGE_SPILL$              TABLE                                            
+LOGMNR_ATTRCOL$                TABLE                                            
+LOGMNR_ATTRIBUTE$              TABLE                                            
+LOGMNR_CCOL$                   TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+LOGMNR_CDEF$                   TABLE                                            
+LOGMNR_COL$                    TABLE                                            
+LOGMNR_COLTYPE$                TABLE                                            
+LOGMNR_DICTIONARY$             TABLE                                            
+LOGMNR_DICTSTATE$              TABLE                                            
+LOGMNR_ENC$                    TABLE                                            
+LOGMNR_ERROR$                  TABLE                                            
+LOGMNR_FILTER$                 TABLE                                            
+LOGMNR_GLOBAL$                 TABLE                                            
+LOGMNR_GT_TAB_INCLUDE$         TABLE                                            
+LOGMNR_GT_USER_INCLUDE$        TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+LOGMNR_GT_XID_INCLUDE$         TABLE                                            
+LOGMNR_ICOL$                   TABLE                                            
+LOGMNR_IND$                    TABLE                                            
+LOGMNR_INDCOMPART$             TABLE                                            
+LOGMNR_INDPART$                TABLE                                            
+LOGMNR_INDSUBPART$             TABLE                                            
+LOGMNR_INTEGRATED_SPILL$       TABLE                                            
+LOGMNR_KOPM$                   TABLE                                            
+LOGMNR_LOB$                    TABLE                                            
+LOGMNR_LOBFRAG$                TABLE                                            
+LOGMNR_LOG$                    TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+LOGMNR_LOGMNR_BUILDLOG         TABLE                                            
+LOGMNR_NTAB$                   TABLE                                            
+LOGMNR_OBJ$                    TABLE                                            
+LOGMNR_OPQTYPE$                TABLE                                            
+LOGMNR_PARAMETER$              TABLE                                            
+LOGMNR_PARTOBJ$                TABLE                                            
+LOGMNR_PROCESSED_LOG$          TABLE                                            
+LOGMNR_PROPS$                  TABLE                                            
+LOGMNR_REFCON$                 TABLE                                            
+LOGMNR_RESTART_CKPT$           TABLE                                            
+LOGMNR_RESTART_CKPT_TXINFO$    TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+LOGMNR_SEED$                   TABLE                                            
+LOGMNR_SESSION$                TABLE                                            
+LOGMNR_SESSION_ACTIONS$        TABLE                                            
+LOGMNR_SESSION_EVOLVE$         TABLE                                            
+LOGMNR_SPILL$                  TABLE                                            
+LOGMNR_SUBCOLTYPE$             TABLE                                            
+LOGMNR_TAB$                    TABLE                                            
+LOGMNR_TABCOMPART$             TABLE                                            
+LOGMNR_TABPART$                TABLE                                            
+LOGMNR_TABSUBPART$             TABLE                                            
+LOGMNR_TS$                     TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+LOGMNR_TYPE$                   TABLE                                            
+LOGMNR_UID$                    TABLE                                            
+LOGMNR_USER$                   TABLE                                            
+LOGSTDBY$APPLY_MILESTONE       TABLE                                            
+LOGSTDBY$APPLY_PROGRESS        TABLE                                            
+LOGSTDBY$EDS_TABLES            TABLE                                            
+LOGSTDBY$EVENTS                TABLE                                            
+LOGSTDBY$FLASHBACK_SCN         TABLE                                            
+LOGSTDBY$HISTORY               TABLE                                            
+LOGSTDBY$PARAMETERS            TABLE                                            
+LOGSTDBY$PLSQL                 TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+LOGSTDBY$SCN                   TABLE                                            
+LOGSTDBY$SKIP                  TABLE                                            
+LOGSTDBY$SKIP_SUPPORT          TABLE                                            
+LOGSTDBY$SKIP_TRANSACTION      TABLE                                            
+MVIEW$_ADV_AJG                 TABLE                                            
+MVIEW$_ADV_BASETABLE           TABLE                                            
+MVIEW$_ADV_CLIQUE              TABLE                                            
+MVIEW$_ADV_ELIGIBLE            TABLE                                            
+MVIEW$_ADV_EXCEPTIONS          TABLE                                            
+MVIEW$_ADV_FILTER              TABLE                                            
+MVIEW$_ADV_FILTERINSTANCE      TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+MVIEW$_ADV_FJG                 TABLE                                            
+MVIEW$_ADV_GC                  TABLE                                            
+MVIEW$_ADV_INFO                TABLE                                            
+MVIEW$_ADV_JOURNAL             TABLE                                            
+MVIEW$_ADV_LEVEL               TABLE                                            
+MVIEW$_ADV_LOG                 TABLE                                            
+MVIEW$_ADV_OUTPUT              TABLE                                            
+MVIEW$_ADV_PARAMETERS          TABLE                                            
+MVIEW$_ADV_PLAN                TABLE                                            
+MVIEW$_ADV_PRETTY              TABLE                                            
+MVIEW$_ADV_ROLLUP              TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+MVIEW$_ADV_SQLDEPEND           TABLE                                            
+MVIEW$_ADV_TEMP                TABLE                                            
+MVIEW$_ADV_WORKLOAD            TABLE                                            
+MVIEW_EVALUATIONS              VIEW                                             
+MVIEW_EXCEPTIONS               VIEW                                             
+MVIEW_FILTER                   VIEW                                             
+MVIEW_FILTERINSTANCE           VIEW                                             
+MVIEW_LOG                      VIEW                                             
+MVIEW_RECOMMENDATIONS          VIEW                                             
+MVIEW_WORKLOAD                 VIEW                                             
+OL$                            TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+OL$HINTS                       TABLE                                            
+OL$NODES                       TABLE                                            
+PRODUCT_PRIVS                  VIEW                                             
+PRODUCT_USER_PROFILE           SYNONYM                                          
+PUBLICSYN                      SYNONYM                                          
+REPCAT$_AUDIT_ATTRIBUTE        TABLE                                            
+REPCAT$_AUDIT_COLUMN           TABLE                                            
+REPCAT$_COLUMN_GROUP           TABLE                                            
+REPCAT$_CONFLICT               TABLE                                            
+REPCAT$_DDL                    TABLE                                            
+REPCAT$_EXCEPTIONS             TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+REPCAT$_EXTENSION              TABLE                                            
+REPCAT$_FLAVORS                TABLE                                            
+REPCAT$_FLAVOR_OBJECTS         TABLE                                            
+REPCAT$_GENERATED              TABLE                                            
+REPCAT$_GROUPED_COLUMN         TABLE                                            
+REPCAT$_INSTANTIATION_DDL      TABLE                                            
+REPCAT$_KEY_COLUMNS            TABLE                                            
+REPCAT$_OBJECT_PARMS           TABLE                                            
+REPCAT$_OBJECT_TYPES           TABLE                                            
+REPCAT$_PARAMETER_COLUMN       TABLE                                            
+REPCAT$_PRIORITY               TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+REPCAT$_PRIORITY_GROUP         TABLE                                            
+REPCAT$_REFRESH_TEMPLATES      TABLE                                            
+REPCAT$_REPCAT                 TABLE                                            
+REPCAT$_REPCATLOG              TABLE                                            
+REPCAT$_REPCOLUMN              TABLE                                            
+REPCAT$_REPGROUP_PRIVS         TABLE                                            
+REPCAT$_REPOBJECT              TABLE                                            
+REPCAT$_REPPROP                TABLE                                            
+REPCAT$_REPSCHEMA              TABLE                                            
+REPCAT$_RESOLUTION             TABLE                                            
+REPCAT$_RESOLUTION_METHOD      TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+REPCAT$_RESOLUTION_STATISTICS  TABLE                                            
+REPCAT$_RESOL_STATS_CONTROL    TABLE                                            
+REPCAT$_RUNTIME_PARMS          TABLE                                            
+REPCAT$_SITES_NEW              TABLE                                            
+REPCAT$_SITE_OBJECTS           TABLE                                            
+REPCAT$_SNAPGROUP              TABLE                                            
+REPCAT$_TEMPLATE_OBJECTS       TABLE                                            
+REPCAT$_TEMPLATE_PARMS         TABLE                                            
+REPCAT$_TEMPLATE_REFGROUPS     TABLE                                            
+REPCAT$_TEMPLATE_SITES         TABLE                                            
+REPCAT$_TEMPLATE_STATUS        TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+REPCAT$_TEMPLATE_TARGETS       TABLE                                            
+REPCAT$_TEMPLATE_TYPES         TABLE                                            
+REPCAT$_USER_AUTHORIZATIONS    TABLE                                            
+REPCAT$_USER_PARM_VALUES       TABLE                                            
+SQLPLUS_PRODUCT_PROFILE        TABLE                                            
+STUDENT                        TABLE                                            
+SYSCATALOG                     SYNONYM                                          
+SYSFILES                       SYNONYM                                          
+TAB                            SYNONYM                                          
+TABQUOTAS                      SYNONYM                                          
+
+175 rows selected.
+
+SQL> create table market(item varchar2(20), saleprice number(10));
+
+Table created.
+
+
+SQL> select *from market;
+
+no rows selected
+
+SQL> desc market;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ITEM                                               VARCHAR2(20)
+ SALEPRICE                                          NUMBER(10)
+
+SQL> insert into market values('&item','&saleprice');
+Enter value for item: mango
+Enter value for saleprice: 40
+old   1: insert into market values('&item','&saleprice')
+new   1: insert into market values('mango','40')
+
+1 row created.
+
+SQL> /
+Enter value for item: guava
+Enter value for saleprice: 80
+old   1: insert into market values('&item','&saleprice')
+new   1: insert into market values('guava','80')
+
+1 row created.
+
+SQL> /
+Enter value for item: tomato
+Enter value for saleprice: 30
+old   1: insert into market values('&item','&saleprice')
+new   1: insert into market values('tomato','30')
+
+1 row created.
+
+SQL> /
+Enter value for item: potato
+Enter value for saleprice: 50
+old   1: insert into market values('&item','&saleprice')
+new   1: insert into market values('potato','50')
+
+1 row created.
+
+SQL> select *from market;
+
+ITEM                  SALEPRICE                                                 
+-------------------- ----------                                                 
+mango                        40                                                 
+guava                        80                                                 
+tomato                       30                                                 
+potato                       50                                                 
+
+SQL> select *from market where saleprice >50;
+
+ITEM                  SALEPRICE                                                 
+-------------------- ----------                                                 
+guava                        80                                                 
+
+SQL> select *from market where saleprice >40 and saleprice <=50;
+
+ITEM                  SALEPRICE                                                 
+-------------------- ----------                                                 
+potato                       50                                                 
+
+SQL> select *from market where saleprice >40 or saleprice <=50;
+
+ITEM                  SALEPRICE                                                 
+-------------------- ----------                                                 
+mango                        40                                                 
+guava                        80                                                 
+tomato                       30                                                 
+potato                       50                                                 
+
+SQL> select *from market where saleprice != 80;
+
+ITEM                  SALEPRICE                                                 
+-------------------- ----------                                                 
+mango                        40                                                 
+tomato                       30                                                 
+potato                       50                                                 
+
+SQL> C:\Users\KIIT\Desktop\Java--Data operation:
+SP2-0023: String not found.
+SQL> --Data operation:
+SQL> select saleprice from market;
+
+
+SQL> select saleprice*10 from market;
+
+SALEPRICE*10                                                                    
+------------                                                                    
+         400                                                                    
+         800                                                                    
+         300                                                                    
+         500                                                                    
+
+SQL> select saleprice*10 from market where saleprice >=50;
+
+SALEPRICE*10                                                                    
+------------                                                                    
+         800                                                                    
+         500                                                                    
+
+SQL> select *from market;
+
+ITEM                  SALEPRICE                                                 
+-------------------- ----------                                                 
+mango                        40                                                 
+guava                        80                                                 
+tomato                       30                                                 
+potato                       50                                                 
+
+SQL> select saleprice/2 from market;
+
+SALEPRICE/2                                                                     
+-----------                                                                     
+         20                                                                     
+         40                                                                     
+         15                                                                     
+         25                                                                     
+
+SQL> --Aliasing:
+--->>>Aliases can be especially useful when working with complex calculations or when you want to avoid using long column names repeatedly.
+SQL> select saleprice/2 as price from market;
+
+     PRICE                                                                      
+----------                                                                      
+        20                                                                      
+        40                                                                      
+        15                                                                      
+        25                                                                      
+
+SQL> select saleprice/2 as "price" from market;
+--->>>Without quotes, SQL typically converts aliases to uppercase.
+
+     price                                                                      
+----------                                                                      
+        20                                                                      
+        40                                                                      
+        15                                                                      
+        25                                                                      
+
+SQL> --for lower case letter "" is use;
+
+SQL> select item as product ,saleprice *10+2 as price from market;
+
+PRODUCT                   PRICE                                                 
+-------------------- ----------                                                 
+mango                       402                                                 
+guava                       802                                                 
+tomato                      302                                                 
+potato                      502                                                 
+
+SQL> select item as "product" ,saleprice *10+2 as "price" from market;
+
+product                   price                                                 
+-------------------- ----------                                                 
+mango                       402                                                 
+guava                       802                                                 
+tomato                      302                                                 
+potato                      502                                                 
+
+SQL> select item as "product" ,(saleprice*10)/2 as "price" from market;
+
+product                   price                                                 
+-------------------- ----------                                                 
+mango                       200                                                 
+guava                       400                                                 
+tomato                      150                                                 
+potato                      250                                                 
+
+SQL> select item  ,(saleprice*10)/2  from market;
+
+ITEM                 (SALEPRICE*10)/2                                           
+-------------------- ----------------                                           
+mango                             200                                           
+guava                             400                                           
+tomato                            150                                           
+potato                            250                                           
+
+SQL> --Aggregate Operation;
+
+--->>>Perform calculations on a set of values and return a single value, They are often used in conjunction with the GROUP BY clause to group rows that have the same values in specified columns.
+
+SQL> --To count the number of rows and column from a particular table :
+
+-->Common aggregate function are COUNT(),MIN(),MAX(),AVG(),SUM().
+SQL> select count (item) from market;
+
+COUNT(ITEM)                                                                     
+-----------                                                                     
+          4                                                                     
+
+SQL> select max(item) from market;
+
+MAX(ITEM)                                                                       
+--------------------                                                            
+tomato                                                                          
+
+SQL> select max(saleprice) from market;
+
+MAX(SALEPRICE)                                                                  
+--------------                                                                  
+            80                                                                  
+
+
+
+SQL> select avg(saleprice) from market;
+
+AVG(SALEPRICE)                                                                  
+--------------                                                                  
+            50                                                                  
+
+SQL> select sum(saleprice) from market;
+
+SUM(SALEPRICE)                                                                  
+--------------                                                                  
+           200                                                                  
+
+SQL> select sum(saleprice) as sum from market;
+
+       SUM                                                                      
+----------                                                                      
+       200                                                                      
+
+SQL> select avg(saleprice) as AVERAGE from market;
+
+   AVERAGE                                                                      
+----------                                                                      
+        50                                                                      
+
+SQL> select sum(saleprice)/count (item) as Average from market;
+
+   AVERAGE                                                                      
+----------                                                                      
+        50                                                                      
+
+SQL> -->> count, sum, max, min, avg:
+
+SQL> select *from market;
+
+ITEM                  SALEPRICE                                                 
+-------------------- ----------                                                 
+mango                        40                                                 
+guava                        80                                                 
+tomato                       30                                                 
+potato                       50                                                 
+
+
+
+
+SQL> insert into market values ('&item','&saleprice');
+Enter value for item: toamto
+Enter value for saleprice: 200
+old   1: insert into market values ('&item','&saleprice')
+new   1: insert into market values ('toamto','200')
+
+1 row created.
+
+SQL> /
+Enter value for item: potato
+Enter value for saleprice: 300
+old   1: insert into market values ('&item','&saleprice')
+new   1: insert into market values ('potato','300')
+
+1 row created.
+
+SQL> select *from market;
+
+ITEM                  SALEPRICE                                                 
+-------------------- ----------                                                 
+mango                        40                                                 
+guava                        80                                                 
+tomato                       30                                                 
+potato                       50                                                 
+toamto                      200                                                 
+potato                      300                                                 
+
+6 rows selected.
+
+
+
+
+SQL> select item from market;
+
+ITEM                                                                            
+--------------------                                                            
+mango                                                                           
+guava                                                                           
+tomato                                                                          
+potato                                                                          
+toamto                                                                          
+potato                                                                          
+
+6 rows selected.
+
+SQL> --To see only distinct element from the table :
+SQL> select distinct (item ) from market;
+
+ITEM                                                                            
+--------------------                                                            
+toamto                                                                          
+mango                                                                           
+guava                                                                           
+potato                                                                          
+tomato                                                                          
+
+SQL> spool off;

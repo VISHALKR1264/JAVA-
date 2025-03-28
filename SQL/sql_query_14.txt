@@ -1,0 +1,150 @@
+SQL> 
+SQL> --SELF JOIN where table is join with itself::
+--For doing SELF JOIN "PRIMARY_KEY" && "FOREIGN_KEY" must be in the same table ::
+SQL> 
+SQL> --especially when the table has a FOREIGN KEY which references its own primary key::
+SQL> 
+SQL> --while joining same table it is not making copy ,it just use recursive closure;
+SQL> --for joining two table it make alise of same table with two names;
+SQL> 
+SQL> 
+SQL> select *from student;
+
+    ROLLNO NAME       BRA                                                       
+---------- ---------- ---                                                       
+        11 riya       CSE                                                       
+        22 diya       IT                                                        
+        33 miya       IT                                                        
+
+SQL> alter table student add  monitor number(2);
+
+Table altered.
+
+SQL> update student set monitor =44 where branch='CSE';
+
+1 row updated.
+
+SQL> insert into student values(44,'tiya','CSE',44);
+
+1 row created.
+
+
+SQL> select *from student;
+
+    ROLLNO NAME       BRA    MONITOR                                            
+---------- ---------- --- ----------                                            
+        44 tiya       CSE         44                                            
+        11 riya       CSE         44                                            
+        22 diya       IT          22                                            
+        33 miya       IT          22                                            
+
+SQL> --Extract name of students who are monitors::
+
+SQL> alter table student add constraint fk_monitor foreign key (monitor) references student(rollno);
+
+Table altered.
+
+SQL> select *from student s1 join student s2 on s1.rollno=s2.monitor;
+
+    ROLLNO NAME       BRA    MONITOR     ROLLNO NAME       BRA    MONITOR       
+---------- ---------- --- ---------- ---------- ---------- --- ----------       
+        44 tiya       CSE         44         44 tiya       CSE         44       
+        44 tiya       CSE         44         11 riya       CSE         44       
+        22 diya       IT          22         22 diya       IT          22       
+        22 diya       IT          22         33 miya       IT          22       
+
+
+SQL> --OR we can also use;
+
+
+SQL> select *from student s1 ,student s2 where s1.rollno=s2.monitor;
+
+    ROLLNO NAME       BRA    MONITOR     ROLLNO NAME       BRA    MONITOR       
+---------- ---------- --- ---------- ---------- ---------- --- ----------       
+        44 tiya       CSE         44         44 tiya       CSE         44       
+        44 tiya       CSE         44         11 riya       CSE         44       
+        22 diya       IT          22         22 diya       IT          22       
+        22 diya       IT          22         33 miya       IT          22       
+
+SQL> --Same result ::
+
+
+
+SQL> select s1.rollno, s1.name, s2.branch from student s1 join student s2 on s1.rollno=s2.monitor;
+
+    ROLLNO NAME       BRA                                                       
+---------- ---------- ---                                                       
+        44 tiya       CSE                                                       
+        44 tiya       CSE                                                       
+        22 diya       IT                                                        
+        22 diya       IT                                                        
+
+
+SQL> select s1.rollno, s1.name, s2.branch from student s1 , student s2 where s1.rollno=s2.monitor;
+
+    ROLLNO NAME       BRA                                                       
+---------- ---------- ---                                                       
+        44 tiya       CSE                                                       
+        44 tiya       CSE                                                       
+        22 diya       IT                                                        
+        22 diya       IT                                                        
+
+SQL> --ONLY DISTINCT VALUE WE NEED::
+
+SQL> select distinct(s1.rollno), s1.name, s2.branch from student s1 , student s2 where s1.rollno=s2.monitor;
+
+    ROLLNO NAME       BRA                                                       
+---------- ---------- ---                                                       
+        22 diya       IT                                                        
+        44 tiya       CSE                                                       
+
+SQL> select distinct(s1.rollno) M_RN , s1.name M_NAME, s2.branch M_BRANCH from student s1 , student s2 where s1.rollno = s2.monitor;
+
+      M_RN M_NAME     M_B                                                       
+---------- ---------- ---                                                       
+        22 diya       IT                                                        
+        44 tiya       CSE                                                       
+
+SQL> select *from student s1 join student s2 on s2.rollno =s1.monitor;
+
+    ROLLNO NAME       BRA    MONITOR     ROLLNO NAME       BRA    MONITOR       
+---------- ---------- --- ---------- ---------- ---------- --- ----------       
+        11 riya       CSE         44         44 tiya       CSE         44       
+        44 tiya       CSE         44         44 tiya       CSE         44       
+        33 miya       IT          22         22 diya       IT          22       
+        22 diya       IT          22         22 diya       IT          22       
+
+SQL> select *from student s1 join student s2 on s2.rollno =s1.rollno;
+
+    ROLLNO NAME       BRA    MONITOR     ROLLNO NAME       BRA    MONITOR       
+---------- ---------- --- ---------- ---------- ---------- --- ----------       
+        44 tiya       CSE         44         44 tiya       CSE         44       
+        11 riya       CSE         44         11 riya       CSE         44       
+        22 diya       IT          22         22 diya       IT          22       
+        33 miya       IT          22         33 miya       IT          22       
+
+SQL> select *from student s1 join student s2 on s2.rollno != s1.rollno;
+
+    ROLLNO NAME       BRA    MONITOR     ROLLNO NAME       BRA    MONITOR       
+---------- ---------- --- ---------- ---------- ---------- --- ----------       
+        44 tiya       CSE         44         11 riya       CSE         44       
+        44 tiya       CSE         44         22 diya       IT          22       
+        44 tiya       CSE         44         33 miya       IT          22       
+        11 riya       CSE         44         44 tiya       CSE         44       
+        11 riya       CSE         44         22 diya       IT          22       
+        11 riya       CSE         44         33 miya       IT          22       
+        22 diya       IT          22         44 tiya       CSE         44       
+        22 diya       IT          22         11 riya       CSE         44       
+        22 diya       IT          22         33 miya       IT          22       
+        33 miya       IT          22         44 tiya       CSE         44       
+        33 miya       IT          22         11 riya       CSE         44       
+
+    ROLLNO NAME       BRA    MONITOR     ROLLNO NAME       BRA    MONITOR       
+---------- ---------- --- ---------- ---------- ---------- --- ----------       
+        33 miya       IT          22         22 diya       IT          22       
+
+12 rows selected.
+
+SQL> --Any condition equi or non-equi joins ..
+SQL> --IN SELF JOIN
+SQL> spool off;

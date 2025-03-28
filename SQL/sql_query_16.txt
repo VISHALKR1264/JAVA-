@@ -1,0 +1,283 @@
+SQL> --RELATIONAL/COMPARISON OPERATORS::
+
+SQL> --COCATENATION::
+SQL> --used for concatinating ||
+SQL> 
+SQL> 
+SQL> CREATE TABLE emp (
+  2      eno NUMBER(3) PRIMARY KEY,
+  3      ename VARCHAR2(50),
+  4      job VARCHAR2(20),
+  5      mgr NUMBER(3),
+  6      salary NUMBER(10),
+  7      dept VARCHAR2(3),
+  8      CONSTRAINT f_k FOREIGN KEY (mgr) REFERENCES emp(eno)
+  9  );
+
+Table created.
+
+SQL> desc emp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ENO                                       NOT NULL NUMBER(3)
+ ENAME                                              VARCHAR2(50)
+ JOB                                                VARCHAR2(20)
+ MGR                                                NUMBER(3)
+ SALARY                                             NUMBER(10)
+ DEPT                                               VARCHAR2(3)
+
+SQL> insert into emp values (313, 'R','Mgr',313,65000,'IT');
+
+1 row created.
+
+SQL> insert into emp values (120, 'A','Eng',313,45000,'IT');
+
+1 row created.
+
+SQL> insert into emp values (301, 'D','Eng',313,65000,'IT');
+
+1 row created.
+
+SQL> insert into emp values (200, 'Q','Mgr',313,56000,'CSE');
+
+1 row created.
+
+SQL> insert into emp values (235, 'S','AP',200,34000,'IT');
+
+1 row created.
+
+SQL> insert into emp values (250, 'F','AP',200,54000,'CSE');
+
+1 row created.
+
+SQL> insert into emp values (432, 'E','Eng',313,45030,'CSE');
+
+1 row created.
+
+SQL> select *from emp;
+
+       ENO ENAME                                                                
+---------- --------------------------------------------------                   
+JOB                         MGR     SALARY DEP                                  
+-------------------- ---------- ---------- ---                                  
+       313 R                                                                    
+Mgr                         313      65000 IT                                   
+                                                                                
+       120 A                                                                    
+Eng                         313      45000 IT                                   
+                                                                                
+       301 D                                                                    
+Eng                         313      65000 IT                                   
+                                                                                
+
+       ENO ENAME                                                                
+---------- --------------------------------------------------                   
+JOB                         MGR     SALARY DEP                                  
+-------------------- ---------- ---------- ---                                  
+       200 Q                                                                    
+Mgr                         313      56000 CSE                                  
+                                                                                
+       235 S                                                                    
+AP                          200      34000 IT                                   
+                                                                                
+       250 F                                                                    
+AP                          200      54000 CSE                                  
+                                                                                
+
+       ENO ENAME                                                                
+---------- --------------------------------------------------                   
+JOB                         MGR     SALARY DEP                                  
+-------------------- ---------- ---------- ---                                  
+       432 E                                                                    
+Eng                         313      45030 CSE                                  
+                                                                                
+
+7 rows selected.
+---->>>To dlt every row from an table ::
+
+SQL> delete from emp;
+
+7 rows deleted.
+
+
+SQL> alter table emp drop constraint f_k;
+
+Table altered.
+
+SQL> alter table emp drop primary key;
+
+Table altered.
+
+
+
+SQL> alter table emp add constraints p_k  primary key(eno);
+
+Table altered.
+
+
+SQL> alter table emp add constraints f_k  foreign key(mgr) references emp(eno);
+
+Table altered.
+
+SQL> select *from emp where job like 'E%';
+
+       ENO ENAME                                                                
+---------- --------------------------------------------------                   
+JOB                         MGR     SALARY DEP                                  
+-------------------- ---------- ---------- ---                                  
+       120 A                                                                    
+Eng                         313      45000 IT                                   
+                                                                                
+       301 D                                                                    
+Eng                         313      65000 IT                                   
+                                                                                
+       432 E                                                                    
+Eng                         313      45030 CSE                                  
+                                                                                
+
+SQL> select *from emp where job like 'E%' AND salary = 45000;
+
+       ENO ENAME                                                                
+---------- --------------------------------------------------                   
+JOB                         MGR     SALARY DEP                                  
+-------------------- ---------- ---------- ---                                  
+       120 A                                                                    
+Eng                         313      45000 IT                                   
+                                                                                
+
+SQL> select *from emp where job like 'E%' OR salary = 45000;
+
+       ENO ENAME                                                                
+---------- --------------------------------------------------                   
+JOB                         MGR     SALARY DEP                                  
+-------------------- ---------- ---------- ---                                  
+       120 A                                                                    
+Eng                         313      45000 IT                                   
+                                                                                
+       301 D                                                                    
+Eng                         313      65000 IT                                   
+                                                                                
+       432 E                                                                    
+Eng                         313      45030 CSE                                  
+                                                                                
+
+SQL> select *from emp where job like 'E%' OR salary > 50000;
+
+       ENO ENAME                                                                
+---------- --------------------------------------------------                   
+JOB                         MGR     SALARY DEP                                  
+-------------------- ---------- ---------- ---                                  
+       120 A                                                                    
+Eng                         313      45000 IT                                   
+                                                                                
+       301 D                                                                    
+Eng                         313      65000 IT                                   
+                                                                                
+       313 R                                                                    
+Mgr                         313      65000 IT                                   
+                                                                                
+
+       ENO ENAME                                                                
+---------- --------------------------------------------------                   
+JOB                         MGR     SALARY DEP                                  
+-------------------- ---------- ---------- ---                                  
+       250 F                                                                    
+AP                          200      54000 CSE                                  
+                                                                                
+       432 E                                                                    
+Eng                         313      45030 CSE                                  
+                                                                                
+       200 Q                                                                    
+Mgr                         313      56000 CSE                                  
+                                                                                
+
+6 rows selected.
+
+SQL> select *from emp where job like 'E%' AND salary > 50000;
+
+       ENO ENAME                                                                
+---------- --------------------------------------------------                   
+JOB                         MGR     SALARY DEP                                  
+-------------------- ---------- ---------- ---                                  
+       301 D                                                                    
+Eng                         313      65000 IT                                   
+                                                                                
+
+SQL> select *from emp where job like 'E%' AND salary < 50000;
+
+       ENO ENAME                                                                
+---------- --------------------------------------------------                   
+JOB                         MGR     SALARY DEP                                  
+-------------------- ---------- ---------- ---                                  
+       120 A                                                                    
+Eng                         313      45000 IT                                   
+                                                                                
+       432 E                                                                    
+Eng                         313      45030 CSE                                  
+                                                                                
+
+SQL> --CONCATINATION USING ||
+SQL> 
+SQL> select eno ||ename from emp;
+
+ENO||ENAME                                                                      
+--------------------------------------------------------------------------------
+120A                                                                            
+301D                                                                            
+235S                                                                            
+313R                                                                            
+250F                                                                            
+432E                                                                            
+200Q                                                                            
+
+7 rows selected.
+
+SQL> select eno ||' '||ename from emp;
+
+ENO||''||ENAME                                                                  
+--------------------------------------------------------------------------------
+120 A                                                                           
+301 D                                                                           
+235 S                                                                           
+313 R                                                                           
+250 F                                                                           
+432 E                                                                           
+200 Q                                                                           
+
+7 rows selected.
+
+SQL> --To store this concatinated result;
+SQL> create table emp1 (eno_name) as select eno||' '||ename from emp;
+
+Table created.
+
+SQL> select *from emp1;
+
+ENO_NAME                                                                        
+--------------------------------------------------------------------------------
+120 A                                                                           
+301 D                                                                           
+235 S                                                                           
+313 R                                                                           
+250 F                                                                           
+432 E                                                                           
+200 Q                                                                           
+
+7 rows selected.
+
+SQL> desc emp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ENO                                       NOT NULL NUMBER(3)
+ ENAME                                              VARCHAR2(50)
+ JOB                                                VARCHAR2(20)
+ MGR                                                NUMBER(3)
+ SALARY                                             NUMBER(10)
+ DEPT                                               VARCHAR2(3)
+
+SQL> desc emp1;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ENO_NAME                                           VARCHAR2(91)
+
+SQL> spool off;

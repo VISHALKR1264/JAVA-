@@ -1,0 +1,108 @@
+SQL> --JOIN OPERATION
+SQL> 
+SQL> --CARTESIAN product + Join condition == join operation::
+SQL> --Cartesian (CROSS) Product --> If 'R' & 'S' are two relations, R X S is the set of all concatenated tuples <x,y>. where `x` is a tuple in 'R' AND  `y` is a tuple in 'S'.
+
+SQL> R and S need not be aggregate operation compatible.
+SQL> RXS is expensive to compute;
+
+
+SQL> 
+SQL> 
+SQL> desc student;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ROLLNO                                             NUMBER(3)
+ NAME                                               VARCHAR2(10)
+ BRANCH                                             VARCHAR2(3)
+
+SQL> alter table student add primary key(rollno);
+
+Table altered.
+
+SQL> desc student;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ROLLNO                                    NOT NULL NUMBER(3)
+ NAME                                               VARCHAR2(10)
+ BRANCH                                             VARCHAR2(3)
+
+
+SQL> create table library(rollno number(3), book varchar (7), foreign key(rollno) references student(rollno));
+
+Table created.
+
+SQL> insert into library values(22,'DBMS');
+
+1 row created.
+
+SQL> insert into library values(33,'PYTHON');
+
+1 row created.
+
+SQL> select *from student;
+
+    ROLLNO NAME       BRA                                                       
+---------- ---------- ---                                                       
+        11 riya       CSE                                                       
+        22 diya       IT                                                        
+        33 miya       IT                                                        
+
+SQL> select *from library;
+
+    ROLLNO BOOK                                                                 
+---------- -------                                                              
+        22 DBMS                                                                 
+        33 PYTHON                                                               
+
+SQL> commit;
+Commit complete.
+
+SQL> --For cartesian product::::
+SQL> 
+SQL> select *from student ,library;
+
+    ROLLNO NAME       BRA     ROLLNO BOOK                                       
+---------- ---------- --- ---------- -------                                    
+        11 riya       CSE         22 DBMS                                       
+        22 diya       IT          22 DBMS                                       
+        33 miya       IT          22 DBMS                                       
+        11 riya       CSE         33 PYTHON                                     
+        22 diya       IT          33 PYTHON                                     
+        33 miya       IT          33 PYTHON                                     
+
+6 rows selected.
+
+
+SQL> --JOIN CONDITIONS::
+SQL> select *from student ,library where student.rollno = library.rollno;
+
+    ROLLNO NAME       BRA     ROLLNO BOOK                                       
+---------- ---------- --- ---------- -------                                    
+        22 diya       IT          22 DBMS                                       
+        33 miya       IT          33 PYTHON                                     
+
+SQL> --This is selection::
+SQL> --For specific column we had to do projection::
+SQL> select student.rollno,name ,branch,book from student ,library where student.rollno = library.rollno;
+
+    ROLLNO NAME       BRA BOOK                                                  
+---------- ---------- --- -------                                               
+        22 diya       IT  DBMS                                                  
+        33 miya       IT  PYTHON                                                
+
+SQL> select student.rollno,name , book from student ,library where student.rollno = library.rollno;
+
+    ROLLNO NAME       BOOK                                                      
+---------- ---------- -------                                                   
+        22 diya       DBMS                                                      
+        33 miya       PYTHON                                                    
+
+SQL> select s.rollno,name , book from student s,library l where s.rollno = l.rollno;
+
+    ROLLNO NAME       BOOK                                                      
+---------- ---------- -------                                                   
+        22 diya       DBMS                                                      
+        33 miya       PYTHON                                                    
+
+SQL> spool off;
