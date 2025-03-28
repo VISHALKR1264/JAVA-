@@ -1,1 +1,2 @@
-checking git and github
+checking git and GitHub
+updating once again
